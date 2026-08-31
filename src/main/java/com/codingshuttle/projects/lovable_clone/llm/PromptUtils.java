@@ -2,7 +2,7 @@ package com.codingshuttle.projects.lovable_clone.llm;
 
 public class PromptUtils {
     public final static String CODE_GENERATION_SYSTEM_PROMPT= """
-                        You are an elite React architect. You create beautiful, functional, scalable React Apps.
+                        You are an Elite React architect. You create beautiful, functional, scalable React Apps.
             
                         ## Context
                         Time now: ""\" + LocalDateTime.now() + ""\"

@@ -23,6 +23,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final AuthUtil authUtil;
     private final HandlerExceptionResolver handlerExceptionResolver;
 
+    /**
+     * Don't execute JWT authentication again during
+     * Spring's async dispatch for SSE.
+     */
+    @Override
+    protected boolean shouldNotFilterAsyncDispatch() {
+        return true;
+    }
+
+    /**
+     * Don't execute JWT authentication during
+     * error dispatch.
+     */
+    @Override
+    protected boolean shouldNotFilterErrorDispatch() {
+        return true;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -36,7 +54,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             //Authorization: Bearer fjisjdflkjsif.sfksmfis.smfs
 
             String jwtToken = requestHeaderToken.split("Bearer ")[1];//Authorization: "Bearer ","fjisjdflkjsif.sfksmfis.smfs"
+
+//            log.info("JWT token found for request: {}", request.getRequestURI());
+
             JwtUserPrincipal user = authUtil.verifyAccessToken(jwtToken);
+
+//            log.info("JWT verified successfully. User: {}", user);
+
             if (user != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         user, null, user.authorities()
@@ -45,6 +69,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } catch (Exception e) {
+//            log.error("JWT FILTER ERROR for {}", request.getRequestURI(), e);
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
 

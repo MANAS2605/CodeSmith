@@ -45,7 +45,7 @@ public class AiGenerationServiceImpl implements AiGenerationService {
         StringBuilder fullResponseBuffer=new StringBuilder();
 
         return chatClient.prompt()
-//                .system(PromptUtils.CODE_GENERATION_SYSTEM_PROMPT)
+                .system(PromptUtils.CODE_GENERATION_SYSTEM_PROMPT)
                 .user(userMessage)
                 .advisors(advisorSpec -> {
                     advisorSpec.params(advisorParams);
@@ -66,24 +66,24 @@ public class AiGenerationServiceImpl implements AiGenerationService {
                 .doOnError(error -> log.error("Error during streaming for projectId: {}", projectId))
                 .map(response -> Objects.requireNonNull(response.getResult().getOutput().getText()));
 
-
-
     }
 
     private void parseAndSaveFiles(String fullResponse, Long projectId) {
 
-//        String dummy= """
-//                <message>
-//                a;sdakcosdk
-//                smvsdpjs
-//                sdmvkmdslk
-//                </message>
-//                <file>
-//                jfeuahsfuiha
-//                afjaokjfiods
-//                fajoisajioafsd
-//                </file>
-//                """;
+/*
+        String dummy= """
+                <message>
+                a;sdakcosdk
+                smvsdpjs
+                sdmvkmdslk
+                </message>
+                <file>
+                jfeuahsfuiha
+                afjaokjfiods
+                fajoisajioafsd
+                </file>
+                """;
+*/
 
         Matcher matcher=FILE_TAG_PATTERN.matcher(fullResponse);
         while (matcher.find()) {
