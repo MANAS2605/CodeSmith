@@ -1,8 +1,9 @@
 package com.codingshuttle.projects.lovable_clone.service;
 
 import aj.org.objectweb.asm.commons.Remapper;
+import com.codingshuttle.projects.lovable_clone.dto.chat.StreamResponse;
 import reactor.core.publisher.Flux;
 
 public interface AiGenerationService {
-    Flux<String> streamResponse(String message, Long projectId);
+    Flux<StreamResponse> streamResponse(String message, Long projectId);
 }

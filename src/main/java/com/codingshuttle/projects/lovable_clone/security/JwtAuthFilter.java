@@ -23,23 +23,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final AuthUtil authUtil;
     private final HandlerExceptionResolver handlerExceptionResolver;
 
-    /**
-     * Don't execute JWT authentication again during
-     * Spring's async dispatch for SSE.
-     */
-    @Override
-    protected boolean shouldNotFilterAsyncDispatch() {
-        return true;
-    }
-
-    /**
-     * Don't execute JWT authentication during
-     * error dispatch.
-     */
-    @Override
-    protected boolean shouldNotFilterErrorDispatch() {
-        return true;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -69,7 +52,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } catch (Exception e) {
-//            log.error("JWT FILTER ERROR for {}", request.getRequestURI(), e);
+            log.error("JWT FILTER ERROR for {}", request.getRequestURI(), e);
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
 

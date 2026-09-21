@@ -16,6 +16,7 @@ import com.codingshuttle.projects.lovable_clone.repository.ProjectRepository;
 import com.codingshuttle.projects.lovable_clone.repository.UserRepository;
 import com.codingshuttle.projects.lovable_clone.security.AuthUtil;
 import com.codingshuttle.projects.lovable_clone.service.ProjectService;
+import com.codingshuttle.projects.lovable_clone.service.ProjectTemplateService;
 import com.codingshuttle.projects.lovable_clone.service.SubscriptionService;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
@@ -41,6 +42,8 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectMapper projectMapper;
     ProjectMemberRepository projectMemberRepository;
     SubscriptionService subscriptionService;
+
+    ProjectTemplateService projectTemplateService;
 
 
     @Override
@@ -70,6 +73,8 @@ public class ProjectServiceImpl implements ProjectService {
                 .build();
         projectMemberRepository.save(projectMember);
 
+        projectTemplateService.initializeProjectFromTemplate(project.getId());
+
 
         return projectMapper.toProjectResponse(project);
 
@@ -85,19 +90,22 @@ public class ProjectServiceImpl implements ProjectService {
 //                .collect(Collectors.toList());
         //method 2
         Long userId = authUtil.getCurrentUserId();
-        var project=projectRepository.findAllAccessibleByUser(userId);
-
-        return projectMapper.toListOfProjectSummaryResponse(project);
+        var projectsWithRoles=projectRepository.findAllAccessibleByUser(userId);
+        return projectsWithRoles.stream()
+                .map(p->projectMapper.toProjectSummaryResponse(p.getProject(),p.getRole()))
+                .toList();
     }
 
 
 
     @Override
     @PreAuthorize("@security.canViewProject(#projectId)")//Component("security")//SpEL
-    public ProjectResponse getUserProjectById(Long projectId) {
+    public ProjectSummaryResponse getUserProjectById(Long projectId) {
         Long userId = authUtil.getCurrentUserId();
-        Project project=getAccessibleProjectById(projectId,userId);
-        return projectMapper.toProjectResponse(project);
+        var projectWithRole= projectRepository.findAccessibleProjectByIdWithRole(projectId, userId).orElseThrow(
+                ()->new BadRequestException("Project Not Found!")
+        );
+        return projectMapper.toProjectSummaryResponse(projectWithRole.getProject(),projectWithRole.getRole());
 
     }
 
@@ -122,8 +130,7 @@ public class ProjectServiceImpl implements ProjectService {
         Long userId = authUtil.getCurrentUserId();
         Project project=getAccessibleProjectById(projectId,userId);
         project.setDeletedAt(Instant.now());
-
-
+        projectRepository.save(project);
     }
 
 

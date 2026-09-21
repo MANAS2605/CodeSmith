@@ -3,6 +3,7 @@ package com.codingshuttle.projects.lovable_clone.controller;
 
 import com.codingshuttle.projects.lovable_clone.dto.project.FileContentResponse;
 import com.codingshuttle.projects.lovable_clone.dto.project.FileNode;
+import com.codingshuttle.projects.lovable_clone.dto.project.FileTreeResponse;
 import com.codingshuttle.projects.lovable_clone.service.ProjectFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +19,15 @@ public class FileController {
     private final ProjectFileService projectFileService;
 
     @GetMapping
-    public ResponseEntity<List<FileNode>> getFileTree(@PathVariable Long projectId){
-        Long userId=1L;
-        return ResponseEntity.ok(projectFileService.getFileTree(projectId,userId));
+    public ResponseEntity<FileTreeResponse> getFileTree(@PathVariable Long projectId){
+        return ResponseEntity.ok(projectFileService.getFileTree(projectId));
     }
 
-    @GetMapping("/(*path)*") // /src/hooks/AppHook.jsx
+    @GetMapping("/content") // /content?path=/src/hooks/AppHook.jsx
     public ResponseEntity<FileContentResponse> getFile(
             @PathVariable Long projectId,
-            @PathVariable String path){
-            Long userId=1L;
-            return ResponseEntity.ok(projectFileService.getFileContent(projectId,path,userId));
+            @RequestParam String path){
+            return ResponseEntity.ok(projectFileService.getFileContent(projectId,path));
     }
 
 

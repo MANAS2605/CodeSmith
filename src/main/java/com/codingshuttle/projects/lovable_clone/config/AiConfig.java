@@ -15,6 +15,5 @@ public class AiConfig {
                         new SimpleLoggerAdvisor()
                 )
                 .build();
-
     }
 }
