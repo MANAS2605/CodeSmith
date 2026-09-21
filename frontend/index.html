@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeSmith</title>
+    <meta name="description" content="CodeSmith — AI Application Studio built on precision infrastructure." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Theme Initialization Script (no-flash) -->
+    <script>
+      (function() {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        function applyTheme(isDark) {
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        }
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark') applyTheme(true);
+        else if (saved === 'light') applyTheme(false);
+        else applyTheme(mq.matches);
+        mq.addEventListener('change', function(e) {
+          if (!localStorage.getItem('theme')) applyTheme(e.matches);
+        });
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
