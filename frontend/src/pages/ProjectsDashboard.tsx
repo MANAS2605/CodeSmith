@@ -16,7 +16,9 @@ import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { ProjectTile } from "@/components/ProjectTile";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { getProjectGradient } from "@/lib/project-images";
+import { getConstellationForProject } from "@/lib/constellations";
 import { CelestialBackground } from "@/components/celestial/CelestialBackground";
+import { ProjectConstellation } from "@/components/celestial/ProjectConstellation";
 import { ConstellationGraphic } from "@/components/celestial/ConstellationGraphic";
 
 export function ProjectsDashboard() {
@@ -216,15 +218,15 @@ export function ProjectsDashboard() {
         {/* Title & Stats Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#6D28D9]/40 bg-[#6D28D9]/15 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-2 backdrop-blur-md">
-              <Sparkles className="w-3 h-3 text-[#EC4899]" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono uppercase tracking-widest mb-2 backdrop-blur-md">
+              <Sparkles className="w-3 h-3 text-purple-500 dark:text-purple-400" />
               <span>Cosmic Workspace</span>
             </div>
             <div className="flex items-baseline gap-3">
               <h1 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-foreground">
                 Projects
               </h1>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#6D28D9]/15 border border-[#6D28D9]/30 text-[#06B6D4] font-mono tabular-nums">
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-cyan-600 dark:text-cyan-400 font-mono tabular-nums">
                 {safeProjects.length} {safeProjects.length === 1 ? "orbit" : "orbits"}
               </span>
             </div>
@@ -232,16 +234,16 @@ export function ProjectsDashboard() {
 
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="h-10 px-4 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white text-sm font-medium gap-2 shadow-[0_0_20px_rgba(236,72,153,0.35)] transition-all duration-300 self-start sm:self-auto">
+              <Button className="h-10 px-4 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-sm font-medium gap-2 shadow-[0_0_20px_rgba(99,102,241,0.35)] transition-all duration-300 self-start sm:self-auto">
                 <Plus className="w-4 h-4" />
                 <span>New Project</span>
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md rounded-xl border border-[#6D28D9]/30 celestial-glass p-6 shadow-2xl">
+            <DialogContent className="max-w-md rounded-xl border border-border/80 dark:border-purple-500/20 celestial-glass p-6 shadow-2xl">
               <DialogHeader>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="p-2 rounded-lg bg-[#6D28D9]/15 text-[#EC4899] border border-[#6D28D9]/30">
-                    <Sparkles className="w-4 h-4 text-[#06B6D4]" />
+                  <span className="p-2 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20">
+                    <Sparkles className="w-4 h-4 text-cyan-400" />
                   </span>
                   <DialogTitle className="font-display text-lg font-semibold text-foreground text-left">
                     Forge New Project
@@ -257,7 +259,7 @@ export function ProjectsDashboard() {
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleCreateProject()}
-                  className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30"
+                  className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30"
                   autoFocus
                 />
               </div>
@@ -268,7 +270,7 @@ export function ProjectsDashboard() {
                 <Button
                   onClick={handleCreateProject}
                   disabled={isCreating || !newProjectName.trim()}
-                  className="h-9 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium shadow-[0_0_15px_rgba(236,72,153,0.35)]"
+                  className="h-9 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-medium shadow-[0_0_15px_rgba(99,102,241,0.35)]"
                 >
                   {isCreating && <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />}
                   Forge Project
@@ -284,18 +286,18 @@ export function ProjectsDashboard() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Search cosmic projects..."
-              className="pl-9 h-10 text-sm rounded-xl bg-card/70 border-border/80 dark:border-[#6D28D9]/30 backdrop-blur-md focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all"
+              className="pl-9 h-10 text-sm rounded-xl bg-card/70 border-border/80 dark:border-purple-500/20 backdrop-blur-md focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30 transition-all"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-1 rounded-xl border border-border/80 dark:border-[#6D28D9]/30 bg-card/60 backdrop-blur-md p-1 shrink-0">
+          <div className="flex items-center gap-1 rounded-xl border border-border/80 dark:border-purple-500/20 bg-card/60 backdrop-blur-md p-1 shrink-0">
             <button
               onClick={() => setViewMode("grid")}
               className={cn(
                 "p-1.5 rounded-lg text-xs transition-all",
                 viewMode === "grid"
-                  ? "bg-[#6D28D9]/25 text-[#06B6D4] font-medium shadow-sm border border-[#6D28D9]/40"
+                  ? "bg-purple-500/20 text-cyan-600 dark:text-cyan-400 font-medium shadow-sm border border-purple-500/30"
                   : "text-muted-foreground hover:text-foreground"
               )}
               title="Grid View"
@@ -308,7 +310,7 @@ export function ProjectsDashboard() {
               className={cn(
                 "p-1.5 rounded-lg text-xs transition-all",
                 viewMode === "list"
-                  ? "bg-[#6D28D9]/25 text-[#06B6D4] font-medium shadow-sm border border-[#6D28D9]/40"
+                  ? "bg-purple-500/20 text-cyan-600 dark:text-cyan-400 font-medium shadow-sm border border-purple-500/30"
                   : "text-muted-foreground hover:text-foreground"
               )}
               title="List View"
@@ -333,7 +335,7 @@ export function ProjectsDashboard() {
           </div>
         ) : filteredProjects.length === 0 ? (
           /* Celestial Empty State with Constellation Graphic */
-          <div className="text-center py-20 px-4 border border-dashed border-[#6D28D9]/40 rounded-2xl bg-card/30 backdrop-blur-md relative overflow-hidden">
+          <div className="text-center py-20 px-4 border border-dashed border-purple-500/30 rounded-2xl bg-card/30 backdrop-blur-md relative overflow-hidden">
             <div className="max-w-xs mx-auto mb-6">
               <ConstellationGraphic variant="compass" className="w-32 h-32 mx-auto" />
             </div>
@@ -348,7 +350,7 @@ export function ProjectsDashboard() {
             {!searchQuery && (
               <Button
                 onClick={() => setIsDialogOpen(true)}
-                className="h-10 px-5 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium text-sm shadow-[0_0_20px_rgba(236,72,153,0.35)] gap-2"
+                className="h-10 px-5 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-medium text-sm shadow-[0_0_20px_rgba(99,102,241,0.35)] gap-2"
               >
                 <Plus className="w-4 h-4" />
                 <span>Forge First Project</span>
@@ -370,9 +372,9 @@ export function ProjectsDashboard() {
             ))}
           </div>
         ) : (
-          <div className="border border-border/80 dark:border-[#6D28D9]/30 rounded-2xl overflow-hidden celestial-glass divide-y divide-border/60 shadow-xl">
+          <div className="border border-border/80 dark:border-purple-500/20 rounded-2xl overflow-hidden celestial-glass divide-y divide-border/60 shadow-xl">
             {/* Header row (>= md) */}
-            <div className="hidden md:grid md:grid-cols-[1fr_130px_150px_48px] items-center px-5 py-3 bg-[#6D28D9]/10 text-[11px] font-mono uppercase tracking-wider text-muted-foreground select-none">
+            <div className="hidden md:grid md:grid-cols-[1fr_130px_150px_48px] items-center px-5 py-3 bg-purple-500/5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground select-none">
               <div>Orbit / Name</div>
               <div>Clearance</div>
               <div>Last Synced</div>
@@ -381,8 +383,7 @@ export function ProjectsDashboard() {
 
             {/* Rows */}
             {filteredProjects.map((project, index) => {
-              const gradient = getProjectGradient(project.id, project.name, index);
-              const firstLetter = project.name ? project.name.charAt(0).toUpperCase() : "P";
+              const constellation = getConstellationForProject(project.id, project.name, index);
 
               return (
                 <div
@@ -396,16 +397,11 @@ export function ProjectsDashboard() {
                       navigate(`/projects/${project.id}`);
                     }
                   }}
-                  className="group flex md:grid md:grid-cols-[1fr_130px_150px_48px] items-center px-5 py-3.5 gap-3 cursor-pointer hover:bg-[#6D28D9]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4] focus-visible:ring-inset transition-colors"
+                  className="group flex md:grid md:grid-cols-[1fr_130px_150px_48px] items-center px-5 py-3.5 gap-3 cursor-pointer hover:bg-purple-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-inset transition-colors"
                 >
-                  {/* Name Column with 40px tile */}
+                  {/* Name Column with 40px constellation tile */}
                   <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 overflow-hidden font-display text-base font-semibold text-white shadow-md ring-1 ring-white/20"
-                      style={{
-                        background: gradient.background,
-                      }}
-                    >
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 overflow-hidden shadow-md ring-1 ring-white/20 bg-[#02040a]">
                       {project.thumbnailUrl ? (
                         <img
                           src={project.thumbnailUrl}
@@ -413,13 +409,16 @@ export function ProjectsDashboard() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="drop-shadow-sm">{firstLetter}</span>
+                        <ProjectConstellation constellation={constellation} size="icon" />
                       )}
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <div className="font-medium text-sm text-foreground truncate group-hover:text-[#EC4899] dark:group-hover:text-[#06B6D4] transition-colors">
-                        {project.name}
+                      <div className="font-medium text-sm text-foreground truncate group-hover:text-purple-600 dark:group-hover:text-cyan-400 transition-colors flex items-center gap-2">
+                        <span className="truncate">{project.name}</span>
+                        <span className="hidden sm:inline-flex items-center text-[10px] font-mono text-muted-foreground/70 bg-purple-500/10 dark:bg-purple-500/20 px-1.5 py-0.5 rounded border border-purple-500/20 shrink-0">
+                          {constellation.name}
+                        </span>
                       </div>
                       {/* Mobile meta row */}
                       <div className="flex md:hidden items-center gap-2 mt-1">
@@ -462,14 +461,14 @@ export function ProjectsDashboard() {
                           onClick={(e) => handleRenameClick(e, project)}
                           className="text-xs cursor-pointer gap-2"
                         >
-                          <Edit className="w-3.5 h-3.5 text-[#EC4899]" />
+                          <Edit className="w-3.5 h-3.5 text-purple-400" />
                           Rename
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={(e) => handleDownloadProject(e, project.id)}
                           className="text-xs cursor-pointer gap-2"
                         >
-                          <Download className="w-3.5 h-3.5 text-[#06B6D4]" />
+                          <Download className="w-3.5 h-3.5 text-cyan-400" />
                           Download Zip
                         </DropdownMenuItem>
                         <DropdownMenuItem
@@ -491,7 +490,7 @@ export function ProjectsDashboard() {
 
       {/* Rename Dialog */}
       <Dialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen}>
-        <DialogContent className="max-w-md rounded-xl border border-[#6D28D9]/30 celestial-glass p-6 shadow-2xl">
+        <DialogContent className="max-w-md rounded-xl border border-border/80 dark:border-purple-500/20 celestial-glass p-6 shadow-2xl">
           <DialogHeader>
             <DialogTitle className="font-display text-lg font-semibold text-foreground text-left">
               Rename Project
@@ -502,7 +501,7 @@ export function ProjectsDashboard() {
               value={renameName}
               onChange={(e) => setRenameName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRenameSubmit()}
-              className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30"
+              className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30"
               autoFocus
             />
           </div>
@@ -517,7 +516,7 @@ export function ProjectsDashboard() {
             <Button
               onClick={handleRenameSubmit}
               disabled={!renameName.trim() || renameName === projectToRename?.name}
-              className="h-9 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium shadow-[0_0_15px_rgba(236,72,153,0.35)]"
+              className="h-9 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-medium shadow-[0_0_15px_rgba(99,102,241,0.35)]"
             >
               Save Changes
             </Button>

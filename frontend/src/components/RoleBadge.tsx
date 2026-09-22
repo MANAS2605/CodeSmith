@@ -27,8 +27,8 @@ export function RoleBadge({ role, className }: RoleBadgeProps) {
     },
     VIEWER: {
       colorClass:
-        "text-[#06B6D4] bg-[#06B6D4]/10 border-[#06B6D4]/30 shadow-[0_0_8px_rgba(6,182,212,0.2)]",
-      dotClass: "bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]",
+        "text-cyan-600 dark:text-cyan-300 bg-cyan-500/10 border-cyan-500/30 shadow-[0_0_8px_rgba(56,189,248,0.2)]",
+      dotClass: "bg-cyan-400 shadow-[0_0_6px_#38bdf8]",
       icon: Eye,
     },
   }[upperRole] || {

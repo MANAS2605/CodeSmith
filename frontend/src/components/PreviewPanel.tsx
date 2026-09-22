@@ -64,13 +64,13 @@ export function PreviewPanel({
   return (
     <div className="flex flex-col h-full bg-background text-foreground relative overflow-hidden">
       {/* 48px Celestial Toolbar */}
-      <div className="h-12 shrink-0 flex items-center gap-2 px-3 border-b border-border/70 dark:border-[#6D28D9]/30 bg-card/40 backdrop-blur-md">
+      <div className="h-12 shrink-0 flex items-center gap-2 px-3 border-b border-border/70 dark:border-purple-500/20 bg-card/40 backdrop-blur-md">
         <Button
           variant="ghost"
           size="icon"
           onClick={handleRefresh}
           disabled={!previewUrl}
-          className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15 disabled:opacity-30"
+          className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-purple-500/10 disabled:opacity-30"
           aria-label="Refresh preview"
           title="Refresh"
         >
@@ -78,8 +78,8 @@ export function PreviewPanel({
         </Button>
 
         {/* URL Bar: Starlight Glass Pill */}
-        <div className="flex-1 flex items-center h-8 px-3 rounded-lg bg-card/70 border border-[#6D28D9]/30 text-xs font-mono text-muted-foreground select-all overflow-hidden backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] shadow-[0_0_6px_#06B6D4] mr-2 shrink-0 animate-pulse" />
+        <div className="flex-1 flex items-center h-8 px-3 rounded-lg bg-card/70 border border-border/80 dark:border-purple-500/20 text-xs font-mono text-muted-foreground select-all overflow-hidden backdrop-blur-md">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#38bdf8] mr-2 shrink-0 animate-pulse" />
           <span className="truncate">
             {previewUrl || "https://preview.cosmos.codesmith.ai"}
           </span>
@@ -91,7 +91,7 @@ export function PreviewPanel({
               variant="ghost"
               size="icon"
               onClick={() => window.open(previewUrl, "_blank")}
-              className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
+              className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-purple-500/10"
               aria-label="Open in new tab"
               title="Open in new tab"
             >
@@ -103,7 +103,7 @@ export function PreviewPanel({
             onClick={handleDeploy}
             disabled={isDeploying}
             size="sm"
-            className="h-8 px-3.5 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white text-xs font-medium gap-1.5 shadow-[0_0_15px_rgba(236,72,153,0.35)] transition-all"
+            className="h-8 px-3.5 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-xs font-medium gap-1.5 shadow-[0_0_15px_rgba(99,102,241,0.35)] transition-all"
           >
             {isDeploying ? (
               <>
@@ -112,7 +112,7 @@ export function PreviewPanel({
               </>
             ) : (
               <>
-                <Play className="w-3 h-3 text-[#06B6D4] fill-current" />
+                <Play className="w-3 h-3 text-cyan-300 fill-current" />
                 <span>Run Preview</span>
               </>
             )}
@@ -121,7 +121,7 @@ export function PreviewPanel({
       </div>
 
       {/* Canvas Area: Celestial Star Grid */}
-      <div className="flex-1 relative bg-card/30 bg-[radial-gradient(rgba(109,40,217,0.15)_1px,transparent_1px)] [background-size:20px_20px] overflow-hidden">
+      <div className="flex-1 relative bg-card/30 bg-[radial-gradient(rgba(99,102,241,0.15)_1px,transparent_1px)] [background-size:20px_20px] overflow-hidden">
         {previewUrl ? (
           <iframe
             src={previewUrl}
@@ -132,7 +132,7 @@ export function PreviewPanel({
         ) : (
           <div className="flex flex-col items-center justify-center h-full text-center p-8 select-none relative">
             {/* Ambient Celestial Glow */}
-            <div className="absolute w-72 h-72 rounded-full bg-gradient-to-tr from-[#6D28D9]/15 via-[#06B6D4]/15 to-transparent blur-3xl pointer-events-none" />
+            <div className="absolute w-72 h-72 rounded-full bg-gradient-to-tr from-purple-500/15 via-cyan-500/15 to-transparent blur-3xl pointer-events-none" />
 
             <div className="relative mb-4">
               <ConstellationGraphic variant="galaxy" className="w-28 h-28 opacity-80" />
@@ -141,16 +141,16 @@ export function PreviewPanel({
               Cosmic Viewport Idle
             </h3>
             <p className="text-xs text-muted-foreground max-w-xs leading-relaxed mb-4">
-              Click <strong className="text-[#06B6D4] font-medium">Run Preview</strong> to compile and launch your application into live orbital execution.
+              Click <strong className="text-cyan-600 dark:text-cyan-400 font-medium">Run Preview</strong> to compile and launch your application into live orbital execution.
             </p>
             <Button
               onClick={handleDeploy}
               disabled={isDeploying}
               size="sm"
               variant="outline"
-              className="h-8 px-3 rounded-lg border-[#6D28D9]/40 hover:border-[#06B6D4]/60 text-xs gap-1.5 backdrop-blur-md"
+              className="h-8 px-3 rounded-lg border-purple-500/30 hover:border-cyan-400/50 text-xs gap-1.5 backdrop-blur-md"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#06B6D4]" />
+              <Sparkles className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />
               <span>Deploy Build Now</span>
             </Button>
           </div>

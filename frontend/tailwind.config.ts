@@ -59,17 +59,18 @@ export default {
           active: "hsl(var(--panel-active))",
         },
         celestial: {
-          void: "#0B071E", // 🌌 PRIMARY BLACK: The Deep Void / Background
-          deep: "#0B071E",
-          surface: "#2D1B4E", // 🔮 NEBULA PURPLE: Card/Container Backgrounds
-          card: "#2D1B4E",
-          violet: "#6D28D9", // ⚡ METEOR VIOLET: Primary Interactive Elements / UI Borders
-          pink: "#EC4899", // 🎨 SUPERNOVA PINK: Glow Accents, Hover States, Call-to-Actions
-          cyan: "#06B6D4", // ❄️ STELLAR CYAN: Highlights, Active States, Text Links
-          border: "rgba(109, 40, 217, 0.35)",
-          "border-hover": "rgba(236, 72, 153, 0.7)",
-          glow: "rgba(236, 72, 153, 0.45)",
-          "glow-cyan": "rgba(6, 182, 212, 0.45)",
+          void: "#030712",
+          deep: "#080c1e",
+          surface: "rgba(15, 23, 42, 0.65)",
+          card: "rgba(17, 24, 39, 0.75)",
+          border: "rgba(99, 102, 241, 0.2)",
+          "border-hover": "rgba(168, 85, 247, 0.45)",
+          glow: "rgba(129, 140, 248, 0.35)",
+          cyan: "#38bdf8",
+          purple: "#a855f7",
+          indigo: "#6366f1",
+          gold: "#fbbf24",
+          rose: "#f43f5e",
         },
       },
       borderRadius: {

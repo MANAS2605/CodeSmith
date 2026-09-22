@@ -65,8 +65,8 @@ export function CelestialBackground({
         ? Math.floor((width * height) / 7000)
         : Math.floor((width * height) / 10000);
 
-    const starColorsDark = ["#ffffff", "#06B6D4", "#EC4899", "#C084FC", "#67E8F9", "#F472B6"];
-    const starColorsLight = ["#6D28D9", "#EC4899", "#06B6D4", "#8B5CF6", "#D946EF"];
+    const starColorsDark = ["#ffffff", "#e0e7ff", "#c7d2fe", "#bae6fd", "#fbcfe8", "#fde68a"];
+    const starColorsLight = ["#6366f1", "#8b5cf6", "#38bdf8", "#a855f7", "#6366f1"];
 
     // Initialize stars with both dark and light palette values
     const stars: Star[] = [];
@@ -165,8 +165,8 @@ export function CelestialBackground({
         grad.addColorStop(
           1,
           dark
-            ? `rgba(236, 72, 153, ${m.opacity})`
-            : `rgba(109, 40, 217, ${m.opacity * 0.7})`
+            ? `rgba(224, 231, 255, ${m.opacity})`
+            : `rgba(99, 102, 241, ${m.opacity * 0.7})`
         );
         ctx.strokeStyle = grad;
 
@@ -195,6 +195,7 @@ export function CelestialBackground({
         if (!isReducedMotion) {
           s.x += s.vx;
           s.y += s.vy;
+
           if (s.x < 0) s.x = width;
           if (s.x > width) s.x = 0;
           if (s.y < 0) s.y = height;
@@ -254,8 +255,8 @@ export function CelestialBackground({
               const lineAlpha = (1 - dStars / maxConnectDist) * (1 - dist / mouseInfluenceDist) * 0.3;
               ctx.save();
               ctx.strokeStyle = dark
-                ? `rgba(6, 182, 212, ${lineAlpha})`
-                : `rgba(109, 40, 217, ${lineAlpha * 0.5})`;
+                ? `rgba(165, 180, 252, ${lineAlpha})`
+                : `rgba(99, 102, 241, ${lineAlpha * 0.5})`;
               ctx.lineWidth = 0.8;
               ctx.beginPath();
               ctx.moveTo(s.x, s.y);
@@ -295,12 +296,12 @@ export function CelestialBackground({
       {/* Radiant Nebula Glow Pools */}
       {showNebula && (
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
-          {/* Top-right Meteor Violet & Nebula Purple */}
-          <div className="absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full bg-gradient-to-br from-purple-200/50 via-pink-100/30 to-transparent dark:from-[#6D28D9]/30 dark:via-[#2D1B4E]/30 blur-3xl animate-pulse-glow" />
-          {/* Bottom-left Stellar Cyan */}
-          <div className="absolute -bottom-36 -left-36 h-[520px] w-[520px] rounded-full bg-gradient-to-tr from-cyan-200/40 via-blue-100/30 to-transparent dark:from-[#06B6D4]/25 dark:via-[#6D28D9]/20 blur-3xl" />
-          {/* Center ambient astral drift with Supernova Pink & Nebula Purple */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[380px] w-[650px] rounded-full bg-gradient-to-r from-pink-100/30 via-purple-100/30 to-cyan-100/30 dark:from-[#EC4899]/20 dark:via-[#2D1B4E]/40 dark:to-[#06B6D4]/20 blur-[110px]" />
+          {/* Top-right violet/indigo nebula */}
+          <div className="absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full bg-gradient-to-br from-purple-200/50 via-indigo-100/40 to-transparent dark:from-purple-900/20 dark:via-indigo-900/15 blur-3xl animate-pulse-glow" />
+          {/* Bottom-left cyan nebula */}
+          <div className="absolute -bottom-36 -left-36 h-[520px] w-[520px] rounded-full bg-gradient-to-tr from-cyan-200/40 via-blue-100/30 to-transparent dark:from-cyan-900/20 dark:via-blue-900/15 blur-3xl" />
+          {/* Center ambient astral drift */}
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[380px] w-[650px] rounded-full bg-gradient-to-r from-pink-100/30 via-purple-100/30 to-cyan-100/30 dark:from-indigo-950/30 dark:via-purple-950/20 dark:to-cyan-950/15 blur-[110px]" />
         </div>
       )}
 

@@ -49,28 +49,28 @@ export function CelestialOrb({
 
   const glowStyles = {
     purple: {
-      core: "from-[#6D28D9] via-[#EC4899] to-[#06B6D4]",
-      halo: "bg-[#EC4899]/30 dark:bg-[#EC4899]/25",
-      ring: "border-[#6D28D9]/40 dark:border-[#6D28D9]/30",
-      node: "bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]",
+      core: "from-violet-600 via-indigo-600 to-cyan-500",
+      halo: "bg-purple-600/30 dark:bg-purple-500/25",
+      ring: "border-purple-400/30 dark:border-purple-400/20",
+      node: "bg-cyan-400 shadow-[0_0_10px_#22d3ee]",
     },
     cyan: {
-      core: "from-[#06B6D4] via-[#6D28D9] to-[#EC4899]",
-      halo: "bg-[#06B6D4]/30 dark:bg-[#06B6D4]/25",
-      ring: "border-[#06B6D4]/40 dark:border-[#06B6D4]/30",
-      node: "bg-[#EC4899] shadow-[0_0_10px_#EC4899]",
+      core: "from-cyan-500 via-blue-600 to-indigo-700",
+      halo: "bg-cyan-500/30 dark:bg-cyan-400/25",
+      ring: "border-cyan-400/30 dark:border-cyan-400/20",
+      node: "bg-purple-400 shadow-[0_0_10px_#c084fc]",
     },
     gold: {
-      core: "from-amber-400 via-[#EC4899] to-[#6D28D9]",
+      core: "from-amber-400 via-orange-500 to-rose-600",
       halo: "bg-amber-500/30 dark:bg-amber-400/25",
       ring: "border-amber-400/30 dark:border-amber-400/20",
-      node: "bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]",
+      node: "bg-amber-300 shadow-[0_0_10px_#fde047]",
     },
     rose: {
-      core: "from-[#EC4899] via-[#6D28D9] to-[#2D1B4E]",
-      halo: "bg-[#EC4899]/30 dark:bg-[#EC4899]/25",
-      ring: "border-[#EC4899]/40 dark:border-[#EC4899]/30",
-      node: "bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]",
+      core: "from-rose-500 via-pink-600 to-violet-700",
+      halo: "bg-rose-500/30 dark:bg-rose-400/25",
+      ring: "border-rose-400/30 dark:border-rose-400/20",
+      node: "bg-indigo-400 shadow-[0_0_10px_#818cf8]",
     },
   }[glowColor];
 

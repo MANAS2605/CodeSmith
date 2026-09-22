@@ -33,7 +33,7 @@ export function ConfirmDialog({
 }: ConfirmDialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="max-w-md rounded-xl border border-[#6D28D9]/40 celestial-glass p-6 shadow-2xl">
+      <AlertDialogContent className="max-w-md rounded-xl border border-border/80 dark:border-purple-500/20 celestial-glass p-6 shadow-2xl">
         <AlertDialogHeader>
           <AlertDialogTitle className="font-display text-lg font-semibold text-foreground">
             {title}
@@ -43,7 +43,7 @@ export function ConfirmDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="mt-4 flex gap-2 sm:justify-end">
-          <AlertDialogCancel className="h-9 px-4 rounded-lg border-border/80 text-sm font-medium hover:bg-[#6D28D9]/15">
+          <AlertDialogCancel className="h-9 px-4 rounded-lg border-border/80 text-sm font-medium hover:bg-purple-500/10">
             {cancelLabel}
           </AlertDialogCancel>
           <AlertDialogAction
@@ -56,7 +56,7 @@ export function ConfirmDialog({
               "h-9 px-4 rounded-lg text-sm font-medium transition-all shadow-md",
               isDestructive
                 ? "bg-destructive hover:bg-destructive/90 text-destructive-foreground shadow-[0_0_15px_rgba(239,68,68,0.3)]"
-                : "bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white shadow-[0_0_15px_rgba(236,72,153,0.3)]"
+                : "bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.35)]"
             )}
           >
             {confirmLabel}

@@ -63,10 +63,10 @@ export default function Signup() {
       </div>
 
       {/* Left panel (>= lg) - Celestial Showcase: exactly 50% width, full height */}
-      <div className="hidden lg:flex lg:w-1/2 min-h-screen bg-gradient-to-b from-purple-50/70 via-pink-50/30 to-cyan-50/50 dark:from-[#0B071E] dark:via-[#2D1B4E]/90 dark:to-[#0B071E] text-foreground dark:text-white p-10 xl:p-14 flex-col justify-between border-r border-border/80 dark:border-[#6D28D9]/30 relative overflow-hidden backdrop-blur-md shrink-0">
+      <div className="hidden lg:flex lg:w-1/2 min-h-screen bg-gradient-to-b from-purple-50/70 via-pink-50/30 to-cyan-50/50 dark:from-[#030712] dark:via-[#080c1e] dark:to-[#030712] text-foreground dark:text-white p-10 xl:p-14 flex-col justify-between border-r border-border/80 dark:border-purple-500/20 relative overflow-hidden backdrop-blur-md shrink-0">
         {/* Ambient lighting */}
-        <div className="absolute top-1/4 -right-20 w-80 h-80 rounded-full bg-cyan-300/30 dark:bg-[#06B6D4]/20 blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-20 w-80 h-80 rounded-full bg-purple-300/30 dark:bg-[#6D28D9]/20 blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/4 -right-20 w-80 h-80 rounded-full bg-cyan-300/30 dark:bg-cyan-500/15 blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 -left-20 w-80 h-80 rounded-full bg-purple-300/30 dark:bg-purple-600/15 blur-[100px] pointer-events-none" />
 
         <div className="relative z-10">
           <Logo size="default" />
@@ -79,8 +79,8 @@ export default function Signup() {
           </div>
 
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#6D28D9]/40 bg-[#6D28D9]/15 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-3 backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-[#EC4899] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono uppercase tracking-widest mb-3 backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400 animate-pulse" />
               <span>Cosmic Developer Genesis</span>
             </div>
             <h1 className="font-display text-3xl xl:text-4xl font-semibold tracking-tight leading-tight text-foreground dark:text-white">
@@ -92,31 +92,31 @@ export default function Signup() {
           </div>
 
           {/* Celestial Real-time Stream Card */}
-          <div className="rounded-xl border border-border/80 dark:border-[#6D28D9]/40 bg-card/90 dark:bg-[#2D1B4E]/75 p-5 space-y-3.5 backdrop-blur-xl shadow-xl dark:shadow-[0_8px_32px_rgba(11,7,30,0.8)] relative overflow-hidden">
+          <div className="rounded-xl border border-border/80 dark:border-purple-500/20 bg-card/90 dark:bg-slate-950/70 p-5 space-y-3.5 backdrop-blur-xl shadow-xl dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5 text-[12px]">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-[#06B6D4] shadow-[0_0_8px_#06B6D4] shrink-0 inline-block animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 shadow-[0_0_8px_#38bdf8] shrink-0 inline-block animate-pulse" />
                 <span className="font-sans font-medium text-foreground dark:text-zinc-200">
                   System Ready: Initializing Project Core
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-[#EC4899] uppercase px-2 py-0.5 rounded bg-[#6D28D9]/15 border border-[#6D28D9]/30">
+              <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 uppercase px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">
                 Astral Mesh
               </span>
             </div>
 
             <div className="flex items-center gap-2 text-xs font-mono">
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Scaffold</span>
-              <span className="px-2.5 py-0.5 rounded-md bg-[#6D28D9]/15 border border-[#6D28D9]/30 text-[#EC4899] text-[11px] flex items-center gap-1.5">
-                <Star className="w-2.5 h-2.5 text-[#EC4899]" />
+              <span className="px-2.5 py-0.5 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-300 text-[11px] flex items-center gap-1.5">
+                <Star className="w-2.5 h-2.5 text-purple-500 dark:text-purple-400" />
                 package.json
               </span>
             </div>
 
             <div className="flex items-center gap-2 text-xs font-mono">
-              <span className="text-[10px] uppercase tracking-wider text-[#06B6D4] font-medium">Ready</span>
-              <span className="px-2.5 py-0.5 rounded-md bg-[#06B6D4]/15 border border-[#06B6D4]/30 text-[#06B6D4] text-[11px] flex items-center gap-1.5">
-                <Sparkles className="w-2.5 h-2.5 text-[#06B6D4]" />
+              <span className="text-[10px] uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-medium">Ready</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-300 text-[11px] flex items-center gap-1.5">
+                <Sparkles className="w-2.5 h-2.5 text-cyan-500 dark:text-cyan-400" />
                 App.tsx
               </span>
             </div>
@@ -125,8 +125,8 @@ export default function Signup() {
 
         <div className="flex items-center justify-between text-xs text-muted-foreground dark:text-zinc-400 font-mono relative z-10 pt-4 border-t border-border/60 dark:border-white/10">
           <span>CodeSmith Astral Studio</span>
-          <span className="text-[#EC4899] flex items-center gap-1.5 font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#EC4899] animate-ping" />
+          <span className="text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
             Gateway Online
           </span>
         </div>
@@ -166,7 +166,7 @@ export default function Signup() {
                     placeholder="Cosmic Voyager"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all text-foreground"
+                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30 transition-all text-foreground"
                     disabled={isLoading}
                     autoComplete="name"
                   />
@@ -175,7 +175,7 @@ export default function Signup() {
 
               <div className="space-y-1.5">
                 <Label htmlFor="email" className="text-xs font-medium text-foreground flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-[#06B6D4]" />
+                  <Mail className="w-3.5 h-3.5 text-purple-500" />
                   Email Address
                 </Label>
                 <div className="relative">
@@ -185,7 +185,7 @@ export default function Signup() {
                     placeholder="explorer@cosmos.io"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all text-foreground"
+                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30 transition-all text-foreground"
                     disabled={isLoading}
                     autoComplete="email"
                   />
@@ -194,7 +194,7 @@ export default function Signup() {
 
               <div className="space-y-1.5">
                 <Label htmlFor="password" className="text-xs font-medium text-foreground flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-[#6D28D9]" />
+                  <Lock className="w-3.5 h-3.5 text-indigo-500" />
                   Password
                 </Label>
                 <div className="relative">
@@ -204,7 +204,7 @@ export default function Signup() {
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all text-foreground"
+                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30 transition-all text-foreground"
                     disabled={isLoading}
                     autoComplete="new-password"
                   />
@@ -214,7 +214,7 @@ export default function Signup() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-10 mt-3 bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium rounded-lg text-sm shadow-[0_0_20px_rgba(236,72,153,0.35)] transition-all duration-300 gap-2"
+                className="w-full h-10 mt-3 bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-medium rounded-lg text-sm shadow-[0_0_20px_rgba(99,102,241,0.35)] transition-all duration-300 gap-2"
               >
                 {isLoading ? (
                   <>
@@ -235,7 +235,7 @@ export default function Signup() {
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="font-medium text-[#06B6D4] hover:text-[#EC4899] underline underline-offset-4 transition-colors"
+                  className="font-medium text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 underline underline-offset-4 transition-colors"
                 >
                   Sign in
                 </Link>

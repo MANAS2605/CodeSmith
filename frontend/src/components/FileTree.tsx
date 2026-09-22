@@ -40,14 +40,14 @@ function FileTreeItem({ node, depth, selectedPath, onSelectFile }: FileTreeItemP
         className={cn(
           "file-tree-item group select-none relative transition-all duration-150",
           isSelected
-            ? "bg-[#2D1B4E]/60 text-purple-700 dark:text-[#06B6D4] font-medium before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-[#06B6D4] before:shadow-[0_0_8px_#06B6D4]"
-            : "hover:bg-[#6D28D9]/15 hover:text-foreground"
+            ? "bg-purple-500/15 text-purple-700 dark:text-cyan-300 font-medium before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-cyan-400 before:shadow-[0_0_8px_#38bdf8]"
+            : "hover:bg-purple-500/10 hover:text-foreground"
         )}
         style={{ paddingLeft: `${depth * 14 + 10}px` }}
         onClick={handleClick}
       >
         {isDirectory ? (
-          <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0 text-muted-foreground group-hover:text-[#EC4899] dark:group-hover:text-[#06B6D4] transition-colors">
+          <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0 text-muted-foreground group-hover:text-purple-600 dark:group-hover:text-cyan-400 transition-colors">
             {isExpanded ? (
               <ChevronDown className="w-3 h-3" />
             ) : (
@@ -69,7 +69,7 @@ function FileTreeItem({ node, depth, selectedPath, onSelectFile }: FileTreeItemP
         <div className="relative">
           {/* Constellation thread indent guide */}
           <div
-            className="absolute top-0 bottom-0 border-l border-[#6D28D9]/25"
+            className="absolute top-0 bottom-0 border-l border-purple-500/20"
             style={{ left: `${depth * 14 + 16}px` }}
           />
           {node.children.map((child) => (
@@ -93,7 +93,7 @@ export function FileTree({ files, selectedPath, onSelectFile, isLoading }: FileT
       <div className="p-3 space-y-2">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div key={i} className="h-6 flex items-center gap-2 animate-pulse">
-            <div className="w-3.5 h-3.5 bg-[#6D28D9]/20 rounded" />
+            <div className="w-3.5 h-3.5 bg-purple-500/20 rounded" />
             <div className="h-3 bg-muted/50 rounded flex-1" style={{ width: `${40 + (i % 3) * 20}%` }} />
           </div>
         ))}

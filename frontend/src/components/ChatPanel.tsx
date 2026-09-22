@@ -89,14 +89,14 @@ export function ChatPanel({
   };
 
   return (
-    <div className="flex flex-col h-full bg-card/40 dark:bg-[#0B071E]/80 text-foreground select-text relative">
+    <div className="flex flex-col h-full bg-card/40 dark:bg-slate-950/40 text-foreground select-text relative">
       {/* Transcript Viewport */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
         <div className="max-w-[44rem] mx-auto w-full">
           {isLoading ? (
             /* Celestial Skeleton lines */
             <div className="space-y-4 py-8 animate-pulse">
-              <div className="h-4 bg-[#6D28D9]/20 rounded-md w-1/4" />
+              <div className="h-4 bg-purple-500/20 rounded-md w-1/4" />
               <div className="h-4 bg-muted/50 rounded-md w-3/4" />
               <div className="h-4 bg-muted/40 rounded-md w-1/2" />
             </div>
@@ -104,7 +104,7 @@ export function ChatPanel({
             /* Celestial Empty State with Constellation Graphic */
             <div className="flex flex-col items-center justify-center py-16 text-center px-4">
               <div className="relative mb-5">
-                <div className="absolute inset-0 rounded-full bg-[#6D28D9]/20 blur-xl animate-pulse-glow" />
+                <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-xl animate-pulse-glow" />
                 <ConstellationGraphic variant="compass" className="w-24 h-24 relative z-10" />
               </div>
               <h3 className="font-display text-xl font-semibold text-foreground mb-2 celestial-gradient-text">
@@ -122,7 +122,7 @@ export function ChatPanel({
                       key={idx}
                       type="button"
                       onClick={() => handleSuggestionClick(suggestion.replace(/^[✨🌌🚀]\s*/, ""))}
-                      className="text-xs px-3 py-1.5 rounded-full border border-[#6D28D9]/30 hover:border-[#EC4899]/60 bg-card/80 dark:bg-[#2D1B4E]/60 hover:bg-[#6D28D9]/15 backdrop-blur-md text-foreground/80 hover:text-[#06B6D4] transition-all text-left truncate shadow-xs"
+                      className="text-xs px-3 py-1.5 rounded-full border border-purple-500/20 hover:border-cyan-400/50 bg-card/80 dark:bg-slate-900/60 hover:bg-purple-500/10 backdrop-blur-md text-foreground/80 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all text-left truncate shadow-xs"
                     >
                       {suggestion}
                     </button>
@@ -146,11 +146,11 @@ export function ChatPanel({
       </div>
 
       {/* Composer Area with Celestial Glass */}
-      <div className="shrink-0 p-3 sm:p-4 border-t border-border/80 dark:border-[#6D28D9]/30 bg-card/80 dark:bg-[#2D1B4E]/40 backdrop-blur-md">
+      <div className="shrink-0 p-3 sm:p-4 border-t border-border/80 dark:border-purple-500/20 bg-card/80 dark:bg-slate-950/40 backdrop-blur-md">
         <div className="max-w-[44rem] mx-auto w-full space-y-2">
           <form
             onSubmit={handleSubmit}
-            className="relative rounded-xl border border-border/90 dark:border-[#6D28D9]/40 bg-background backdrop-blur-xl transition-all focus-within:border-[#06B6D4] focus-within:ring-2 focus-within:ring-[#EC4899]/30 focus-within:shadow-[0_0_20px_rgba(236,72,153,0.2)] p-2.5"
+            className="relative rounded-xl border border-border/90 dark:border-purple-500/30 bg-background backdrop-blur-xl transition-all focus-within:border-cyan-400 focus-within:ring-2 focus-within:ring-purple-500/30 focus-within:shadow-[0_0_20px_rgba(99,102,241,0.2)] p-2.5"
           >
             <Textarea
               ref={textareaRef}
@@ -171,7 +171,7 @@ export function ChatPanel({
               type="submit"
               size="icon"
               disabled={!input.trim() || isStreaming || readOnly}
-              className="absolute right-2.5 bottom-2.5 h-8 w-8 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white shadow-[0_0_12px_rgba(236,72,153,0.4)] disabled:opacity-30 transition-all"
+              className="absolute right-2.5 bottom-2.5 h-8 w-8 rounded-lg bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white shadow-[0_0_12px_rgba(99,102,241,0.4)] disabled:opacity-30 transition-all"
               aria-label="Send message"
             >
               {isStreaming ? (
@@ -191,8 +191,8 @@ export function ChatPanel({
             </div>
 
             {isStreaming && (
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] text-[#06B6D4] font-medium">
-                <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-ping" />
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] text-cyan-600 dark:text-cyan-400 font-medium">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
                 Synthesizing Astral Code...
               </span>
             )}
@@ -220,7 +220,7 @@ function TranscriptTurn({
     <div className="space-y-2">
       {/* Speaker Header */}
       <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground select-none">
-        <span className={cn("font-semibold", isUser ? "text-[#EC4899]" : "text-[#06B6D4]")}>
+        <span className={cn("font-semibold", isUser ? "text-purple-600 dark:text-purple-300" : "text-cyan-600 dark:text-cyan-300")}>
           {isUser ? "EXPLORER" : "CODESMITH AI"}
         </span>
         {message.createdAt && (
@@ -235,14 +235,14 @@ function TranscriptTurn({
 
       {isUser ? (
         /* User Turn: Celestial Glass Bubble */
-        <div className="bg-white dark:bg-[#2D1B4E]/90 text-foreground border border-border/90 dark:border-[#6D28D9]/40 p-4 text-sm leading-relaxed whitespace-pre-wrap rounded-2xl shadow-sm dark:shadow-md">
+        <div className="bg-white dark:bg-slate-900/80 text-foreground border border-border/90 dark:border-purple-500/20 p-4 text-sm leading-relaxed whitespace-pre-wrap rounded-2xl shadow-sm dark:shadow-md">
           {message.content}
         </div>
       ) : (
         /* Assistant Turn: Left Celestial Pulsar Timeline */
-        <div className="pl-4 border-l-2 border-[#6D28D9]/40 dark:border-[#6D28D9]/30 space-y-2 py-0.5 relative">
+        <div className="pl-4 border-l-2 border-purple-500/40 dark:border-purple-500/30 space-y-2 py-0.5 relative">
           {/* Pulsar Node at top of timeline */}
-          <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4]" />
+          <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8]" />
 
           <div className="space-y-1.5">
             {eventsToRender && eventsToRender.length > 0 ? (
@@ -259,7 +259,7 @@ function TranscriptTurn({
                 {isStreaming && <span className="streaming-cursor" />}
               </div>
             ) : isStreaming ? (
-              <div className="flex items-center gap-2 text-xs text-[#06B6D4] font-mono py-1.5">
+              <div className="flex items-center gap-2 text-xs text-cyan-600 dark:text-cyan-400 font-mono py-1.5">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
                 <span>Synthesizing astral response...</span>
               </div>

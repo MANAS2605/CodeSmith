@@ -23,13 +23,13 @@ export function ThemeToggle() {
       onClick={handleToggle}
       aria-label="Toggle celestial atmosphere"
       title={dark ? "Switch to Astral Dawn" : "Switch to Cosmic Void"}
-      className="relative h-8 w-8 rounded-full border border-[#6D28D9]/30 bg-card/80 backdrop-blur-md hover:border-[#06B6D4]/50 hover:shadow-[0_0_12px_rgba(236,72,153,0.3)] transition-all group overflow-hidden"
+      className="relative h-8 w-8 rounded-full border border-border/80 dark:border-purple-500/20 bg-card/80 backdrop-blur-md hover:border-cyan-400/50 hover:shadow-[0_0_12px_rgba(99,102,241,0.25)] transition-all group overflow-hidden"
     >
       <div className="relative flex items-center justify-center w-full h-full">
         {/* Sun (Astral Dawn) */}
         <Sun className="h-4 w-4 text-amber-500 transition-all duration-500 rotate-0 scale-100 dark:-rotate-90 dark:scale-0 group-hover:rotate-45" />
         {/* Moon with subtle sparkle (Cosmic Void) */}
-        <Moon className="absolute h-4 w-4 text-[#06B6D4] transition-all duration-500 rotate-90 scale-0 dark:rotate-0 dark:scale-100 group-hover:-rotate-12" />
+        <Moon className="absolute h-4 w-4 text-cyan-400 transition-all duration-500 rotate-90 scale-0 dark:rotate-0 dark:scale-100 group-hover:-rotate-12" />
       </div>
     </Button>
   );

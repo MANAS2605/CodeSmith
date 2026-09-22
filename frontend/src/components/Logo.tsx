@@ -41,15 +41,15 @@ export function Logo({
         className={cn(
           "relative flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105",
           inverted
-            ? "bg-gradient-to-tr from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white shadow-[0_0_15px_rgba(236,72,153,0.5)] ring-1 ring-white/30"
-            : "bg-gradient-to-tr from-[#0B071E] via-[#2D1B4E] to-[#6D28D9] text-[#06B6D4] dark:from-[#0B071E] dark:via-[#2D1B4E] dark:to-[#6D28D9] dark:text-[#06B6D4] shadow-[0_0_16px_rgba(109,40,217,0.45)] ring-1 ring-[#6D28D9]/40 dark:ring-[#06B6D4]/30",
+            ? "bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.5)] ring-1 ring-white/30"
+            : "bg-gradient-to-tr from-purple-900/80 via-indigo-900/60 to-slate-900/90 text-cyan-400 dark:from-purple-950 dark:via-indigo-950 dark:to-slate-950 dark:text-cyan-300 shadow-[0_0_16px_rgba(139,92,246,0.35)] ring-1 ring-purple-500/30 dark:ring-purple-400/20",
           boxSize
         )}
       >
         {/* Subtle rotating orbital ring on hover */}
-        <div className="absolute inset-[-3px] rounded-full border border-dashed border-[#06B6D4]/40 opacity-0 group-hover:opacity-100 animate-orbit transition-opacity" />
+        <div className="absolute inset-[-3px] rounded-full border border-dashed border-cyan-400/30 opacity-0 group-hover:opacity-100 animate-orbit transition-opacity" />
 
-        {/* 4-point Celestial Star SVG */}
+        {/* 4-point Celestial Gemini Star SVG */}
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -67,20 +67,20 @@ export function Logo({
       </div>
 
       {!hideWordmark && (
-        <div className="flex items-baseline gap-1">
+        <div className="flex items-center gap-1 leading-none">
           <span
             className={cn(
-              "font-display font-semibold tracking-tight transition-colors",
+              "font-display font-semibold tracking-tight transition-colors flex items-center leading-none",
               inverted
                 ? "text-white"
-                : "text-foreground group-hover:text-[#EC4899] dark:group-hover:text-[#06B6D4]",
+                : "text-foreground group-hover:text-purple-600 dark:group-hover:text-cyan-300",
               textSize
             )}
           >
-            Code<span className="bg-gradient-to-r from-[#EC4899] to-[#06B6D4] bg-clip-text text-transparent">Smith</span>
+            Code<span className="bg-gradient-to-r from-violet-600 to-cyan-600 dark:from-white dark:via-purple-200 dark:to-cyan-300 bg-clip-text text-transparent">Smith</span>
           </span>
           {size === "lg" && (
-            <span className="text-[10px] font-mono tracking-widest uppercase px-1.5 py-0.5 rounded-full bg-[#6D28D9]/15 text-[#EC4899] dark:text-[#06B6D4] border border-[#6D28D9]/30">
+            <span className="text-[10px] font-mono tracking-widest uppercase px-1.5 py-0.5 rounded-full bg-purple-500/10 text-purple-700 dark:text-cyan-300 border border-purple-500/20">
               Cosmos
             </span>
           )}

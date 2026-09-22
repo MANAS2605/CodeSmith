@@ -288,12 +288,12 @@ Please analyze this error and fix the code to resolve it.`;
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-background text-foreground">
       {/* Command Bridge Header */}
-      <header className="h-13 shrink-0 border-b border-border/70 dark:border-[#6D28D9]/30 celestial-glass flex items-center justify-between px-3.5 gap-2.5 z-20">
+      <header className="h-13 shrink-0 border-b border-border/70 dark:border-purple-500/20 celestial-glass flex items-center justify-between px-3.5 gap-2.5 z-20">
         {/* Left: Logo mark + breadcrumb + name + actions + status */}
         <div className="flex items-center gap-2.5 min-w-0 flex-1">
           <Link
             to="/projects"
-            className="p-1.5 rounded-lg border border-[#6D28D9]/30 hover:border-[#06B6D4]/60 hover:bg-[#6D28D9]/15 transition-all shrink-0 flex items-center group"
+            className="p-1.5 rounded-lg border border-purple-500/30 hover:border-cyan-400/60 hover:bg-purple-500/10 transition-all shrink-0 flex items-center group"
             title="Back to cosmic workspaces"
           >
             <Logo size="sm" hideWordmark />
@@ -313,7 +313,7 @@ Please analyze this error and fix the code to resolve it.`;
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6 rounded-md text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
+                      className="h-6 w-6 rounded-md text-muted-foreground hover:text-foreground hover:bg-purple-500/10"
                       aria-label="Project actions"
                     >
                       <MoreVertical className="w-3.5 h-3.5" />
@@ -321,11 +321,11 @@ Please analyze this error and fix the code to resolve it.`;
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start" className="w-40 rounded-xl border-border/80 bg-popover/95 backdrop-blur-md shadow-2xl">
                     <DropdownMenuItem onClick={openRenameDialog} className="text-xs cursor-pointer gap-2">
-                      <Edit className="w-3.5 h-3.5 text-[#EC4899]" />
+                      <Edit className="w-3.5 h-3.5 text-purple-400" />
                       Rename
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleDownloadProject} className="text-xs cursor-pointer gap-2">
-                      <Download className="w-3.5 h-3.5 text-[#06B6D4]" />
+                      <Download className="w-3.5 h-3.5 text-cyan-400" />
                       Download Zip
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -344,9 +344,9 @@ Please analyze this error and fix the code to resolve it.`;
           )}
 
           {/* Status Indicator */}
-          <div className="hidden xl:flex items-center gap-2 ml-3 pl-3 border-l border-border/70 dark:border-[#6D28D9]/30 text-xs text-muted-foreground select-none">
-            <span className="w-2 h-2 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4] shrink-0 inline-block animate-pulse" />
-            <span className="text-[11px] font-mono tracking-wide text-[#06B6D4]">
+          <div className="hidden xl:flex items-center gap-2 ml-3 pl-3 border-l border-border/70 dark:border-purple-500/20 text-xs text-muted-foreground select-none">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8] shrink-0 inline-block animate-pulse" />
+            <span className="text-[11px] font-mono tracking-wide text-cyan-600 dark:text-cyan-400">
               Cosmos Sync: Active
             </span>
           </div>
@@ -354,14 +354,14 @@ Please analyze this error and fix the code to resolve it.`;
 
         {/* Center: Segmented Preview | Code Toggle */}
         <div className="shrink-0">
-          <div className="flex items-center rounded-xl border border-border/70 dark:border-[#6D28D9]/30 bg-card/60 backdrop-blur-md p-1 gap-1 shadow-inner">
+          <div className="flex items-center rounded-xl border border-border/70 dark:border-purple-500/20 bg-card/60 backdrop-blur-md p-1 gap-1 shadow-inner">
             <button
               onClick={() => setViewMode("preview")}
               className={cn(
                 "flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all select-none",
                 viewMode === "preview"
-                  ? "bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white shadow-[0_0_12px_rgba(236,72,153,0.4)] font-semibold"
-                  : "text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
+                  ? "bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 text-white shadow-[0_0_12px_rgba(99,102,241,0.35)] font-semibold"
+                  : "text-muted-foreground hover:text-foreground hover:bg-purple-500/10"
               )}
             >
               <Eye className="w-3.5 h-3.5" />
@@ -372,8 +372,8 @@ Please analyze this error and fix the code to resolve it.`;
               className={cn(
                 "flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all select-none",
                 viewMode === "code"
-                  ? "bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white shadow-[0_0_12px_rgba(236,72,153,0.4)] font-semibold"
-                  : "text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
+                  ? "bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 text-white shadow-[0_0_12px_rgba(99,102,241,0.35)] font-semibold"
+                  : "text-muted-foreground hover:text-foreground hover:bg-purple-500/10"
               )}
             >
               <Code className="w-3.5 h-3.5" />
@@ -386,9 +386,9 @@ Please analyze this error and fix the code to resolve it.`;
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <ThemeToggle />
           {project && (
-            <div className="hidden sm:flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-card/70 border border-[#6D28D9]/30 backdrop-blur-md">
-              <Avatar className="h-5 w-5 ring-1 ring-[#EC4899]/40">
-                <AvatarFallback className="text-[10px] bg-gradient-to-tr from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white font-semibold">
+            <div className="hidden sm:flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-card/70 border border-border/70 dark:border-purple-500/20 backdrop-blur-md">
+              <Avatar className="h-5 w-5 ring-1 ring-purple-500/40">
+                <AvatarFallback className="text-[10px] bg-gradient-to-tr from-violet-600 to-cyan-600 text-white font-semibold">
                   {(() => {
                     const userInfo = getUserInfo();
                     if (userInfo?.name) {
@@ -408,7 +408,7 @@ Please analyze this error and fix the code to resolve it.`;
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-3 text-xs font-medium rounded-lg border-[#6D28D9]/40 hover:border-[#06B6D4]/60 hover:bg-[#6D28D9]/15 transition-all"
+                className="h-8 px-3 text-xs font-medium rounded-lg border-purple-500/30 hover:border-cyan-400/60 hover:bg-purple-500/10 transition-all"
                 disabled={project?.role === "VIEWER"}
               >
                 Share
@@ -421,13 +421,13 @@ Please analyze this error and fix the code to resolve it.`;
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-3 text-xs font-medium rounded-lg border-[#6D28D9]/40 hover:border-[#06B6D4]/60 hover:bg-[#6D28D9]/15 hidden sm:inline-flex transition-all"
+                className="h-8 px-3 text-xs font-medium rounded-lg border-purple-500/30 hover:border-cyan-400/60 hover:bg-purple-500/10 hidden sm:inline-flex transition-all"
               >
                 Upgrade
               </Button>
               <Button
                 size="sm"
-                className="h-8 px-3.5 text-xs font-medium rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white shadow-[0_0_15px_rgba(236,72,153,0.35)] transition-all"
+                className="h-8 px-3.5 text-xs font-medium rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.35)] transition-all"
               >
                 Publish
               </Button>
@@ -438,7 +438,7 @@ Please analyze this error and fix the code to resolve it.`;
             variant="ghost"
             size="icon"
             onClick={handleLogout}
-            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-purple-500/10"
             aria-label="Sign out"
             title="Sign out"
           >
@@ -452,7 +452,7 @@ Please analyze this error and fix the code to resolve it.`;
         <ResizablePanelGroup direction="horizontal" className="h-full">
           {/* Left Chat Panel (35%) */}
           <ResizablePanel defaultSize={35} minSize={25} maxSize={50}>
-            <div className="h-full border-r border-border/70 dark:border-[#6D28D9]/30 bg-panel/70">
+            <div className="h-full border-r border-border/70 dark:border-purple-500/20 bg-panel/70">
               <ChatPanel
                 messages={messages}
                 onSendMessage={handleSendMessage}
@@ -464,7 +464,7 @@ Please analyze this error and fix the code to resolve it.`;
           </ResizablePanel>
 
           {/* Resizable Handle: 2px line with glowing cyan starlight hover */}
-          <ResizableHandle className="w-[2px] bg-border/80 dark:bg-[#6D28D9]/30 hover:bg-[#06B6D4] active:bg-[#EC4899] transition-colors duration-200 relative after:absolute after:-left-2 after:-right-2 after:top-0 after:bottom-0 after:cursor-col-resize z-10" />
+          <ResizableHandle className="w-[2px] bg-border/80 dark:bg-purple-500/20 hover:bg-cyan-400 active:bg-violet-500 transition-colors duration-200 relative after:absolute after:-left-2 after:-right-2 after:top-0 after:bottom-0 after:cursor-col-resize z-10" />
 
           {/* Right Code/Preview Panel (65%) */}
           <ResizablePanel defaultSize={65} minSize={50} maxSize={75}>
@@ -487,7 +487,7 @@ Please analyze this error and fix the code to resolve it.`;
 
       {/* Rename Dialog */}
       <Dialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen}>
-        <DialogContent className="max-w-md rounded-xl border border-[#6D28D9]/30 celestial-glass p-6 shadow-2xl">
+        <DialogContent className="max-w-md rounded-xl border border-border/80 dark:border-purple-500/20 celestial-glass p-6 shadow-2xl">
           <DialogHeader>
             <DialogTitle className="font-display text-lg font-semibold text-foreground text-left">
               Rename Project Orbit
@@ -498,7 +498,7 @@ Please analyze this error and fix the code to resolve it.`;
               value={renameName}
               onChange={(e) => setRenameName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRenameSubmit()}
-              className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30"
+              className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30"
               autoFocus
             />
           </div>
@@ -513,7 +513,7 @@ Please analyze this error and fix the code to resolve it.`;
             <Button
               onClick={handleRenameSubmit}
               disabled={!renameName.trim() || renameName === project?.name}
-              className="h-9 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium shadow-[0_0_15px_rgba(236,72,153,0.3)]"
+              className="h-9 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-medium shadow-[0_0_15px_rgba(99,102,241,0.35)]"
             >
               Save Changes
             </Button>

@@ -14,12 +14,12 @@ export const ChatEventRenderer = ({
   switch (event.type) {
     case ChatEventType.THOUGHT:
       return (
-        <div className="flex items-start gap-2.5 text-muted-foreground text-[13px] font-normal leading-normal my-1.5 p-2 rounded-lg bg-[#2D1B4E]/30 border border-[#6D28D9]/30">
+        <div className="flex items-start gap-2.5 text-muted-foreground text-[13px] font-normal leading-normal my-1.5 p-2 rounded-lg bg-purple-500/5 border border-purple-500/10">
           <div className="mt-1 shrink-0">
             {isLoading ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#06B6D4]" />
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" />
             ) : (
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#EC4899] shadow-[0_0_6px_#EC4899] align-middle animate-pulse" />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc] align-middle animate-pulse" />
             )}
           </div>
           <span className="italic text-foreground/80">{event.content}</span>
@@ -29,10 +29,10 @@ export const ChatEventRenderer = ({
     case ChatEventType.TOOL_LOG:
       return (
         <CollapsibleEvent
-          icon={<FileSearch className="w-3.5 h-3.5 text-[#6D28D9] dark:text-[#EC4899]" />}
+          icon={<FileSearch className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />}
           label="Read"
           event={event}
-          badgeStyle="bg-[#6D28D9]/20 border-[#6D28D9]/40 text-[#EC4899] font-medium"
+          badgeStyle="bg-purple-500/10 border-purple-500/20 text-purple-600 dark:text-purple-300 font-medium"
         />
       );
 
@@ -41,16 +41,16 @@ export const ChatEventRenderer = ({
         <CollapsibleEvent
           icon={
             isLoading ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#06B6D4]" />
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" />
             ) : (
-              <FileEdit className="w-3.5 h-3.5 text-[#06B6D4]" />
+              <FileEdit className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             )
           }
           label={isLoading ? "Forging" : "Forged"}
           event={event}
           hideToggle
           forceSingleLine={isLoading}
-          badgeStyle="bg-[#06B6D4]/15 border-[#06B6D4]/40 text-[#06B6D4] font-medium shadow-[0_0_8px_rgba(6,182,212,0.25)]"
+          badgeStyle="bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-300 font-medium shadow-[0_0_8px_rgba(56,189,248,0.2)]"
         />
       );
 
@@ -124,7 +124,7 @@ const CollapsibleEvent = ({
           <button
             type="button"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-muted-foreground hover:text-foreground text-[11px] font-mono px-2 py-0.5 rounded-md border border-border/80 dark:border-[#6D28D9]/30 bg-card/60 hover:bg-[#6D28D9]/15 transition-colors shrink-0"
+            className="text-muted-foreground hover:text-foreground text-[11px] font-mono px-2 py-0.5 rounded-md border border-border/80 dark:border-purple-500/20 bg-card/60 hover:bg-purple-500/10 transition-colors shrink-0"
           >
             {isExpanded ? "Hide" : "Show"}
           </button>

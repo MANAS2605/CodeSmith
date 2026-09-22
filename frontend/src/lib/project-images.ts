@@ -6,24 +6,24 @@ export interface GradientTheme {
 
 export const PROJECT_GRADIENTS: GradientTheme[] = [
   {
-    name: "Supernova Nebula",
-    background: "linear-gradient(135deg, #0B071E 0%, #2D1B4E 35%, #6D28D9 70%, #EC4899 100%)",
-    accent: "#EC4899",
+    name: "Celestial Aurora",
+    background: "linear-gradient(135deg, #030712 0%, #1e1b4b 35%, #4338ca 70%, #06b6d4 100%)",
+    accent: "#6366f1",
   },
   {
-    name: "Stellar Void",
-    background: "linear-gradient(135deg, #0B071E 0%, #2D1B4E 40%, #06B6D4 100%)",
-    accent: "#06B6D4",
+    name: "Cosmic Nebula",
+    background: "linear-gradient(135deg, #0f172a 0%, #581c87 40%, #a855f7 100%)",
+    accent: "#a855f7",
   },
   {
-    name: "Meteor Radiance",
-    background: "linear-gradient(135deg, #2D1B4E 0%, #6D28D9 50%, #EC4899 100%)",
-    accent: "#6D28D9",
+    name: "Stellar Horizon",
+    background: "linear-gradient(135deg, #020617 0%, #1e3a8a 50%, #38bdf8 100%)",
+    accent: "#38bdf8",
   },
   {
-    name: "Cosmic Aurora",
-    background: "linear-gradient(135deg, #0B071E 0%, #6D28D9 40%, #06B6D4 75%, #EC4899 100%)",
-    accent: "#06B6D4",
+    name: "Astral Violet",
+    background: "linear-gradient(135deg, #090d1f 0%, #312e81 40%, #7c3aed 75%, #c084fc 100%)",
+    accent: "#8b5cf6",
   },
   {
     name: "Electric Crimson",
@@ -116,14 +116,14 @@ export function getProjectImage(projectId?: number | string | null, customThumbn
 }
 
 export const AVATAR_COLORS = [
-  "#6D28D9", // Meteor Violet
-  "#EC4899", // Supernova Pink
-  "#06B6D4", // Stellar Cyan
-  "#2D1B4E", // Nebula Purple
-  "#8B5CF6", // Astral Violet
-  "#F43F5E", // Astral Rose
-  "#0EA5E9", // Sky Cyan
-  "#7C3AED", // Royal Violet
+  "#6366f1", // Cosmic Indigo
+  "#8b5cf6", // Astral Violet
+  "#a855f7", // Stellar Purple
+  "#0ea5e9", // Sky Cyan
+  "#06b6d4", // Deep Cyan
+  "#3b82f6", // Starlight Blue
+  "#7c3aed", // Royal Violet
+  "#f43f5e", // Astral Rose
 ];
 
 export function getAvatarColor(idOrName?: string | number | null): string {

@@ -15,7 +15,7 @@ export function ConstellationGraphic({
       {variant === "compass" && (
         <svg
           viewBox="0 0 200 200"
-          className="w-full h-full text-[#6D28D9] dark:text-[#EC4899]"
+          className="w-full h-full text-indigo-500 dark:text-purple-400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -85,8 +85,8 @@ export function ConstellationGraphic({
                 cx={star.cx}
                 cy={star.cy}
                 r={star.r}
-                fill={star.center ? "#06B6D4" : "currentColor"}
-                className={star.center ? "dark:fill-[#06B6D4]" : ""}
+                fill={star.center ? "#38bdf8" : "currentColor"}
+                className={star.center ? "dark:fill-[#38bdf8]" : ""}
               />
             </g>
           ))}
@@ -96,7 +96,7 @@ export function ConstellationGraphic({
       {variant === "galaxy" && (
         <svg
           viewBox="0 0 200 200"
-          className="w-full h-full text-[#06B6D4]"
+          className="w-full h-full text-cyan-500 dark:text-cyan-400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

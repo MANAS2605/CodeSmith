@@ -26,9 +26,9 @@ const Index = () => {
         {/* Orbital Starlight Core */}
         <div className="relative flex items-center justify-center">
           {/* Concentric Rotating Celestial Rings */}
-          <div className="absolute w-28 h-28 rounded-full border border-dashed border-[#6D28D9]/35 animate-orbit" />
-          <div className="absolute w-20 h-20 rounded-full border border-dashed border-[#06B6D4]/40 animate-orbit-reverse" />
-          <div className="absolute w-12 h-12 rounded-full bg-gradient-to-r from-[#6D28D9]/25 to-[#06B6D4]/25 blur-xl animate-pulse-glow" />
+          <div className="absolute w-28 h-28 rounded-full border border-dashed border-purple-500/35 animate-orbit" />
+          <div className="absolute w-20 h-20 rounded-full border border-dashed border-cyan-400/40 animate-orbit-reverse" />
+          <div className="absolute w-12 h-12 rounded-full bg-gradient-to-r from-purple-500/25 to-cyan-400/25 blur-xl animate-pulse-glow" />
 
           {/* Logo */}
           <Logo size="lg" />
@@ -36,8 +36,8 @@ const Index = () => {
 
         {/* Celestial Loading Status */}
         <div className="flex flex-col items-center gap-2.5">
-          <div className="w-48 h-1 bg-[#0B071E] rounded-full overflow-hidden relative border border-[#6D28D9]/30">
-            <div className="absolute inset-y-0 bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] w-1/2 rounded-full animate-[shimmer_1.5s_infinite]" />
+          <div className="w-48 h-1 bg-[#080c1e] rounded-full overflow-hidden relative border border-purple-500/30">
+            <div className="absolute inset-y-0 bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 w-1/2 rounded-full animate-[shimmer_1.5s_infinite]" />
           </div>
           <span className="text-[11px] font-mono tracking-wider uppercase text-muted-foreground/80">
             Initializing Celestial Environment...

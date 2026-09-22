@@ -123,11 +123,11 @@ export function ShareDialog({
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-      <DialogContent className="max-w-md rounded-xl border border-[#6D28D9]/40 celestial-glass p-6 shadow-2xl text-foreground">
+      <DialogContent className="max-w-md rounded-xl border border-border/80 dark:border-purple-500/20 celestial-glass p-6 shadow-2xl text-foreground">
         <DialogHeader className="mb-4">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-[#6D28D9]/20 text-[#06B6D4] border border-[#6D28D9]/30">
-              <Users className="w-4 h-4 text-[#06B6D4]" />
+            <span className="p-1.5 rounded-lg bg-purple-500/10 text-cyan-600 dark:text-cyan-400 border border-purple-500/20">
+              <Users className="w-4 h-4 text-cyan-400" />
             </span>
             <DialogTitle className="font-display text-lg font-semibold text-foreground text-left">
               Share Project Orbit
@@ -140,7 +140,7 @@ export function ShareDialog({
           <div className="flex gap-2">
             <Input
               placeholder="explorer@cosmos.io"
-              className="flex-1 h-9 text-xs rounded-lg bg-background/80 border-border/80 focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30"
+              className="flex-1 h-9 text-xs rounded-lg bg-background/80 border-border/80 focus-visible:border-cyan-400 focus-visible:ring-2 focus-visible:ring-purple-500/30"
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleInvite()}
@@ -148,7 +148,7 @@ export function ShareDialog({
             <Button
               onClick={handleInvite}
               disabled={!inviteEmail.trim() || loading}
-              className="h-9 px-4 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white text-xs font-medium shrink-0 shadow-[0_0_12px_rgba(236,72,153,0.3)] gap-1.5"
+              className="h-9 px-4 rounded-lg bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-xs font-medium shrink-0 shadow-[0_0_12px_rgba(99,102,241,0.35)] gap-1.5"
             >
               <UserPlus className="w-3.5 h-3.5" />
               <span>Invite</span>
@@ -176,15 +176,15 @@ export function ShareDialog({
         {/* Members List */}
         <div className="space-y-3">
           <h4 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3 text-[#06B6D4]" />
+            <Sparkles className="w-3 h-3 text-cyan-400" />
             <span>Orbit Collaborators</span>
           </h4>
 
-          <div className="divide-y divide-border/60 border border-border/80 dark:border-[#6D28D9]/30 rounded-xl max-h-[260px] overflow-y-auto bg-background/60 backdrop-blur-md">
+          <div className="divide-y divide-border/60 border border-border/80 dark:border-purple-500/20 rounded-xl max-h-[260px] overflow-y-auto bg-background/60 backdrop-blur-md">
             {members.length === 0 && (
               <div className="h-12 px-3.5 flex items-center gap-3">
-                <Avatar className="h-8 w-8 rounded-full ring-1 ring-[#6D28D9]/50">
-                  <AvatarFallback className="text-[11px] font-semibold bg-gradient-to-tr from-[#6D28D9] to-[#06B6D4] text-white">
+                <Avatar className="h-8 w-8 rounded-full ring-1 ring-purple-500/50">
+                  <AvatarFallback className="text-[11px] font-semibold bg-gradient-to-tr from-violet-600 to-cyan-600 text-white">
                     YOU
                   </AvatarFallback>
                 </Avatar>
@@ -206,9 +206,9 @@ export function ShareDialog({
               return (
                 <div
                   key={member.userId}
-                  className="h-12 px-3.5 flex items-center gap-3 hover:bg-[#6D28D9]/15 transition-colors"
+                  className="h-12 px-3.5 flex items-center gap-3 hover:bg-purple-500/10 transition-colors"
                 >
-                  <Avatar className="h-8 w-8 rounded-full border border-[#6D28D9]/30">
+                  <Avatar className="h-8 w-8 rounded-full border border-border/80 dark:border-purple-500/20">
                     <AvatarFallback
                       className="text-[11px] font-semibold"
                       style={{ backgroundColor: tone.bg, color: tone.fg }}
@@ -238,7 +238,7 @@ export function ShareDialog({
                         else handleRoleChange(member.userId, val as ProjectRole);
                       }}
                     >
-                      <SelectTrigger className="h-7 w-[96px] text-xs border-none bg-transparent hover:bg-[#6D28D9]/15 focus:ring-1 focus:ring-[#06B6D4] shadow-none p-1 font-mono">
+                      <SelectTrigger className="h-7 w-[96px] text-xs border-none bg-transparent hover:bg-purple-500/10 focus:ring-1 focus:ring-cyan-400 shadow-none p-1 font-mono">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent align="end" className="rounded-xl border-border/80 bg-popover/95 backdrop-blur-md text-xs">
