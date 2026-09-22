@@ -3,9 +3,13 @@ import { Send, Loader2, ThumbsUp, ThumbsDown, Copy, RotateCcw } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { format } from "date-fns";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useStreamParser } from "../hooks/use-stream-parser";
 import { ChatEventRenderer } from "./ChatEventRenderer";
 import { ChatEvent } from "@/lib/types";
+import { ConstellationGraphic } from "./celestial/ConstellationGraphic";
+import { cn } from "@/lib/utils";
 
 export interface ChatMessage {
   id: string;
@@ -25,6 +29,12 @@ interface ChatPanelProps {
   readOnly?: boolean;
 }
 
+const SUGGESTIONS = [
+  "✨ Add interactive celestial animations to the header",
+  "🌌 Build a dynamic constellation network component",
+  "🚀 Refactor the layout with glowing glassmorphism",
+];
+
 export function ChatPanel({
   messages,
   onSendMessage,
@@ -36,13 +46,13 @@ export function ChatPanel({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
+    messagesEndRef.current?.scrollIntoView({ behavior });
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    scrollToBottom(isStreaming ? "auto" : "smooth");
+  }, [messages, isStreaming]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,27 +80,55 @@ export function ChatPanel({
     textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
   };
 
+  const handleSuggestionClick = (prompt: string) => {
+    if (isStreaming || readOnly) return;
+    setInput(prompt);
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full bg-background text-foreground select-text">
+    <div className="flex flex-col h-full bg-card/40 dark:bg-[#0B071E]/80 text-foreground select-text relative">
       {/* Transcript Viewport */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
         <div className="max-w-[44rem] mx-auto w-full">
           {isLoading ? (
-            /* 3 skeleton lines */
+            /* Celestial Skeleton lines */
             <div className="space-y-4 py-8 animate-pulse">
-              <div className="h-4 bg-muted/60 rounded w-1/4" />
-              <div className="h-4 bg-muted/40 rounded w-3/4" />
-              <div className="h-4 bg-muted/30 rounded w-1/2" />
+              <div className="h-4 bg-[#6D28D9]/20 rounded-md w-1/4" />
+              <div className="h-4 bg-muted/50 rounded-md w-3/4" />
+              <div className="h-4 bg-muted/40 rounded-md w-1/2" />
             </div>
           ) : messages.length === 0 ? (
-            /* Quiet empty state: serif heading + 1 line copy, no Bot icon */
-            <div className="flex flex-col items-center justify-center py-24 text-center px-4">
-              <h3 className="font-display text-xl font-medium text-foreground mb-2">
-                What are we building?
+            /* Celestial Empty State with Constellation Graphic */
+            <div className="flex flex-col items-center justify-center py-16 text-center px-4">
+              <div className="relative mb-5">
+                <div className="absolute inset-0 rounded-full bg-[#6D28D9]/20 blur-xl animate-pulse-glow" />
+                <ConstellationGraphic variant="compass" className="w-24 h-24 relative z-10" />
+              </div>
+              <h3 className="font-display text-xl font-semibold text-foreground mb-2 celestial-gradient-text">
+                What shall we forge among the stars?
               </h3>
-              <p className="text-sm text-muted-foreground max-w-sm">
-                Describe what you want to build or modify
+              <p className="text-xs sm:text-sm text-muted-foreground max-w-sm mb-6 leading-relaxed">
+                Describe the celestial features, UI transformations, or logic you wish to construct.
               </p>
+
+              {/* Suggestion Chips */}
+              {!readOnly && (
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2 justify-center max-w-md">
+                  {SUGGESTIONS.map((suggestion, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleSuggestionClick(suggestion.replace(/^[✨🌌🚀]\s*/, ""))}
+                      className="text-xs px-3 py-1.5 rounded-full border border-[#6D28D9]/30 hover:border-[#EC4899]/60 bg-card/80 dark:bg-[#2D1B4E]/60 hover:bg-[#6D28D9]/15 backdrop-blur-md text-foreground/80 hover:text-[#06B6D4] transition-all text-left truncate shadow-xs"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <div className="space-y-6">
@@ -107,13 +145,12 @@ export function ChatPanel({
         </div>
       </div>
 
-      {/* Composer Area */}
-      <div className="shrink-0 p-3 sm:p-4 border-t border-border bg-panel">
+      {/* Composer Area with Celestial Glass */}
+      <div className="shrink-0 p-3 sm:p-4 border-t border-border/80 dark:border-[#6D28D9]/30 bg-card/80 dark:bg-[#2D1B4E]/40 backdrop-blur-md">
         <div className="max-w-[44rem] mx-auto w-full space-y-2">
-          {/* Bordered card container, focus-within = signal ring */}
           <form
             onSubmit={handleSubmit}
-            className="relative rounded-[8px] border border-border bg-background transition-all focus-within:ring-2 focus-within:ring-signal focus-within:ring-offset-1 focus-within:ring-offset-background p-2"
+            className="relative rounded-xl border border-border/90 dark:border-[#6D28D9]/40 bg-background backdrop-blur-xl transition-all focus-within:border-[#06B6D4] focus-within:ring-2 focus-within:ring-[#EC4899]/30 focus-within:shadow-[0_0_20px_rgba(236,72,153,0.2)] p-2.5"
           >
             <Textarea
               ref={textareaRef}
@@ -122,10 +159,10 @@ export function ChatPanel({
               onKeyDown={handleKeyDown}
               placeholder={
                 readOnly
-                  ? "You have view-only access to this project"
-                  : "Describe what you want to build..."
+                  ? "View-only access enabled for this orbit"
+                  : "Transmit instructions to the celestial forge..."
               }
-              className="min-h-[52px] max-h-[200px] w-full resize-none border-0 bg-transparent p-1 pr-10 text-sm leading-relaxed text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:outline-none shadow-none"
+              className="min-h-[52px] max-h-[200px] w-full resize-none border-0 bg-transparent p-1 pr-12 text-sm leading-relaxed text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:outline-none shadow-none"
               disabled={isStreaming || readOnly}
               rows={1}
             />
@@ -134,7 +171,7 @@ export function ChatPanel({
               type="submit"
               size="icon"
               disabled={!input.trim() || isStreaming || readOnly}
-              className="absolute right-2.5 bottom-2.5 h-8 w-8 rounded-[6px] bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 transition-opacity"
+              className="absolute right-2.5 bottom-2.5 h-8 w-8 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white shadow-[0_0_12px_rgba(236,72,153,0.4)] disabled:opacity-30 transition-all"
               aria-label="Send message"
             >
               {isStreaming ? (
@@ -147,16 +184,16 @@ export function ChatPanel({
 
           {/* Footer Keyboard Hint & Thinking Indicator */}
           <div className="flex items-center justify-between px-1 text-xs text-muted-foreground">
-            <div className="font-mono text-[11px] select-none text-muted-foreground">
-              <span>Enter to send</span>
-              <span className="mx-1 text-border">·</span>
-              <span>Shift+Enter for a new line</span>
+            <div className="font-mono text-[11px] select-none text-muted-foreground flex items-center gap-1.5">
+              <span>Enter to transmit</span>
+              <span className="text-border">·</span>
+              <span>Shift+Enter for newline</span>
             </div>
 
             {isStreaming && (
-              <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-signal font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-signal animate-ping" />
-                Thinking...
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] text-[#06B6D4] font-medium">
+                <span className="w-2 h-2 rounded-full bg-[#06B6D4] animate-ping" />
+                Synthesizing Astral Code...
               </span>
             )}
           </div>
@@ -180,11 +217,11 @@ function TranscriptTurn({
   const isUser = message.role === "user";
 
   return (
-    <div className="space-y-1.5">
-      {/* Speaker Header: Small mono uppercase label + timestamp */}
+    <div className="space-y-2">
+      {/* Speaker Header */}
       <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground select-none">
-        <span className="font-medium text-foreground/80">
-          {isUser ? "YOU" : "CODESMITH"}
+        <span className={cn("font-semibold", isUser ? "text-[#EC4899]" : "text-[#06B6D4]")}>
+          {isUser ? "EXPLORER" : "CODESMITH AI"}
         </span>
         {message.createdAt && (
           <>
@@ -197,33 +234,45 @@ function TranscriptTurn({
       </div>
 
       {isUser ? (
-        /* User Turn: 6px radius block on muted background */
-        <div className="rounded-[6px] bg-muted/50 border border-border/60 p-3.5 text-sm text-foreground leading-relaxed whitespace-pre-wrap">
+        /* User Turn: Celestial Glass Bubble */
+        <div className="bg-white dark:bg-[#2D1B4E]/90 text-foreground border border-border/90 dark:border-[#6D28D9]/40 p-4 text-sm leading-relaxed whitespace-pre-wrap rounded-2xl shadow-sm dark:shadow-md">
           {message.content}
         </div>
       ) : (
-        /* Assistant Turn: 1px left rule timeline */
-        <div className="pl-3.5 border-l border-border space-y-2 py-0.5">
-          <div className="space-y-1">
-            {eventsToRender.map((event, idx) => {
-              const isLast = idx === eventsToRender.length - 1;
-              return (
+        /* Assistant Turn: Left Celestial Pulsar Timeline */
+        <div className="pl-4 border-l-2 border-[#6D28D9]/40 dark:border-[#6D28D9]/30 space-y-2 py-0.5 relative">
+          {/* Pulsar Node at top of timeline */}
+          <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4]" />
+
+          <div className="space-y-1.5">
+            {eventsToRender && eventsToRender.length > 0 ? (
+              eventsToRender.map((event, idx) => (
                 <ChatEventRenderer
                   key={idx}
                   event={event}
-                  isLoading={isStreaming && isLast}
+                  isLoading={isStreaming && idx === eventsToRender.length - 1}
                 />
-              );
-            })}
+              ))
+            ) : message.content && message.content.trim().length > 0 ? (
+              <div className="prose prose-sm dark:prose-invert max-w-none text-foreground leading-relaxed my-1.5 break-words">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+                {isStreaming && <span className="streaming-cursor" />}
+              </div>
+            ) : isStreaming ? (
+              <div className="flex items-center gap-2 text-xs text-[#06B6D4] font-mono py-1.5">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Synthesizing astral response...</span>
+              </div>
+            ) : null}
           </div>
 
           {/* Action buttons for finished assistant turns */}
-          {!isStreaming && eventsToRender.length > 0 && (
+          {!isStreaming && (eventsToRender.length > 0 || (message.content && message.content.trim().length > 0)) && (
             <div className="flex items-center gap-1 pt-1 opacity-70 hover:opacity-100 transition-opacity">
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 rounded-[4px] text-muted-foreground hover:text-foreground"
+                className="h-7 w-7 rounded-md text-muted-foreground hover:text-foreground"
                 aria-label="Retry"
                 title="Retry"
               >
@@ -232,7 +281,7 @@ function TranscriptTurn({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 rounded-[4px] text-muted-foreground hover:text-foreground"
+                className="h-7 w-7 rounded-md text-muted-foreground hover:text-foreground"
                 aria-label="Thumbs up"
                 title="Thumbs up"
               >
@@ -241,7 +290,7 @@ function TranscriptTurn({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 rounded-[4px] text-muted-foreground hover:text-foreground"
+                className="h-7 w-7 rounded-md text-muted-foreground hover:text-foreground"
                 aria-label="Thumbs down"
                 title="Thumbs down"
               >
@@ -250,7 +299,7 @@ function TranscriptTurn({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 rounded-[4px] text-muted-foreground hover:text-foreground"
+                className="h-7 w-7 rounded-md text-muted-foreground hover:text-foreground"
                 aria-label="Copy message"
                 title="Copy"
                 onClick={() => {

@@ -70,7 +70,7 @@ export function CodeEditor({ content, filePath, isLoading, onCodeChange }: CodeE
   }
 
   return (
-    <div className="h-full w-full overflow-hidden bg-[#18181b] dark:bg-[#18181b]">
+    <div className="h-full w-full overflow-hidden bg-white dark:bg-[#0B071E]">
       <CodeMirror
         value={displayContent}
         height="100%"

@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { Code, Eye, LogOut, MoreVertical, Trash, Download, Edit } from "lucide-react";
+import { Code, Eye, LogOut, MoreVertical, Trash, Download, Edit, Sparkles, ChevronRight, Orbit } from "lucide-react";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { ChatPanel, ChatMessage } from "@/components/ChatPanel";
 import { CodePanel } from "@/components/CodePanel";
@@ -167,7 +167,7 @@ export function ProjectView() {
           setMessages((prev) =>
             prev.map((msg) =>
               msg.id === aiMessageId
-                ? { ...msg, content: "Sorry, an error occurred.", isStreaming: false }
+                ? { ...msg, content: "Sorry, a cosmic connection error occurred.", isStreaming: false }
                 : msg
             )
           );
@@ -230,7 +230,7 @@ Please analyze this error and fix the code to resolve it.`;
     try {
       await api.deleteProject(projectId);
       navigate("/projects");
-      toast({ title: "Success", description: "Project deleted successfully" });
+      toast({ title: "Success", description: "Project orbit deleted successfully" });
     } catch (error) {
       console.error("Failed to delete:", error);
       toast({ title: "Error", description: "Failed to delete project", variant: "destructive" });
@@ -249,7 +249,7 @@ Please analyze this error and fix the code to resolve it.`;
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast({ title: "Success", description: "Download started" });
+      toast({ title: "Success", description: "Archive download initiated" });
     } catch (error) {
       console.error("Failed to download:", error);
       toast({ title: "Error", description: "Failed to download project", variant: "destructive" });
@@ -280,30 +280,30 @@ Please analyze this error and fix the code to resolve it.`;
   if (!projectId) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-muted-foreground text-sm">Invalid project ID</p>
+        <p className="text-muted-foreground text-sm">Invalid project orbit ID</p>
       </div>
     );
   }
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-background text-foreground">
-      {/* 48px Header */}
-      <header className="h-12 shrink-0 border-b border-border bg-panel flex items-center justify-between px-3 gap-2">
+      {/* Command Bridge Header */}
+      <header className="h-13 shrink-0 border-b border-border/70 dark:border-[#6D28D9]/30 celestial-glass flex items-center justify-between px-3.5 gap-2.5 z-20">
         {/* Left: Logo mark + breadcrumb + name + actions + status */}
-        <div className="flex items-center gap-2 min-w-0 flex-1">
+        <div className="flex items-center gap-2.5 min-w-0 flex-1">
           <Link
             to="/projects"
-            className="hover:opacity-85 transition-opacity shrink-0 flex items-center"
-            title="Back to projects"
+            className="p-1.5 rounded-lg border border-[#6D28D9]/30 hover:border-[#06B6D4]/60 hover:bg-[#6D28D9]/15 transition-all shrink-0 flex items-center group"
+            title="Back to cosmic workspaces"
           >
             <Logo size="sm" hideWordmark />
           </Link>
 
-          <span className="text-border text-sm select-none font-light">/</span>
+          <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/50 shrink-0" />
 
           {project ? (
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span className="font-display font-medium text-[15px] text-foreground truncate max-w-[160px] sm:max-w-[220px]">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="font-display font-semibold text-[15px] text-foreground truncate max-w-[160px] sm:max-w-[240px] celestial-gradient-text">
                 {project.name}
               </span>
 
@@ -313,26 +313,26 @@ Please analyze this error and fix the code to resolve it.`;
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6 rounded-[4px] text-muted-foreground hover:text-foreground"
+                      className="h-6 w-6 rounded-md text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
                       aria-label="Project actions"
                     >
                       <MoreVertical className="w-3.5 h-3.5" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-40 rounded-[6px] border-border bg-popover shadow-md">
-                    <DropdownMenuItem onClick={openRenameDialog} className="text-xs cursor-pointer">
-                      <Edit className="w-3.5 h-3.5 mr-2 text-muted-foreground" />
+                  <DropdownMenuContent align="start" className="w-40 rounded-xl border-border/80 bg-popover/95 backdrop-blur-md shadow-2xl">
+                    <DropdownMenuItem onClick={openRenameDialog} className="text-xs cursor-pointer gap-2">
+                      <Edit className="w-3.5 h-3.5 text-[#EC4899]" />
                       Rename
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleDownloadProject} className="text-xs cursor-pointer">
-                      <Download className="w-3.5 h-3.5 mr-2 text-muted-foreground" />
-                      Download
+                    <DropdownMenuItem onClick={handleDownloadProject} className="text-xs cursor-pointer gap-2">
+                      <Download className="w-3.5 h-3.5 text-[#06B6D4]" />
+                      Download Zip
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className="text-xs text-destructive focus:text-destructive focus:bg-destructive/10 cursor-pointer"
+                      className="text-xs text-destructive focus:text-destructive focus:bg-destructive/10 cursor-pointer gap-2"
                       onClick={promptDeleteProject}
                     >
-                      <Trash className="w-3.5 h-3.5 mr-2" />
+                      <Trash className="w-3.5 h-3.5" />
                       Delete
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -340,53 +340,55 @@ Please analyze this error and fix the code to resolve it.`;
               )}
             </div>
           ) : (
-            <div className="w-28 h-4 bg-muted/70 rounded-[4px] animate-pulse" />
+            <div className="w-32 h-4 bg-muted/70 rounded-md animate-pulse" />
           )}
 
           {/* Status Indicator */}
-          <div className="hidden xl:flex items-center gap-2 ml-3 pl-3 border-l border-border text-xs text-muted-foreground select-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-signal shrink-0 inline-block animate-pulse" />
-            <span className="text-[11px]">Previewing last saved version</span>
+          <div className="hidden xl:flex items-center gap-2 ml-3 pl-3 border-l border-border/70 dark:border-[#6D28D9]/30 text-xs text-muted-foreground select-none">
+            <span className="w-2 h-2 rounded-full bg-[#06B6D4] shadow-[0_0_8px_#06B6D4] shrink-0 inline-block animate-pulse" />
+            <span className="text-[11px] font-mono tracking-wide text-[#06B6D4]">
+              Cosmos Sync: Active
+            </span>
           </div>
         </div>
 
-        {/* Center: Segmented Preview | Code Toggle (Auralis Pill Scaffolding) */}
+        {/* Center: Segmented Preview | Code Toggle */}
         <div className="shrink-0">
-          <div className="flex items-center rounded-[6px] border border-border bg-panel p-0.5">
+          <div className="flex items-center rounded-xl border border-border/70 dark:border-[#6D28D9]/30 bg-card/60 backdrop-blur-md p-1 gap-1 shadow-inner">
             <button
               onClick={() => setViewMode("preview")}
               className={cn(
-                "flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-[4px] transition-colors select-none border-b-2",
+                "flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all select-none",
                 viewMode === "preview"
-                  ? "bg-card text-foreground border-signal font-semibold"
-                  : "text-muted-foreground hover:text-foreground border-transparent"
+                  ? "bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white shadow-[0_0_12px_rgba(236,72,153,0.4)] font-semibold"
+                  : "text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
               )}
             >
               <Eye className="w-3.5 h-3.5" />
-              Preview
+              <span>Preview</span>
             </button>
             <button
               onClick={() => setViewMode("code")}
               className={cn(
-                "flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-[4px] transition-colors select-none border-b-2",
+                "flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all select-none",
                 viewMode === "code"
-                  ? "bg-card text-foreground border-signal font-semibold"
-                  : "text-muted-foreground hover:text-foreground border-transparent"
+                  ? "bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white shadow-[0_0_12px_rgba(236,72,153,0.4)] font-semibold"
+                  : "text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
               )}
             >
               <Code className="w-3.5 h-3.5" />
-              Code
+              <span>Code</span>
             </button>
           </div>
         </div>
 
         {/* Right: avatar + role, project actions and logout */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <ThemeToggle />
           {project && (
-            <div className="hidden sm:flex items-center gap-2 pl-1 pr-2 py-0.5 rounded-[5px] bg-panel-hover/60 border border-border/60">
-              <Avatar className="h-5 w-5">
-                <AvatarFallback className="text-[10px] bg-muted text-foreground font-semibold">
+            <div className="hidden sm:flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-card/70 border border-[#6D28D9]/30 backdrop-blur-md">
+              <Avatar className="h-5 w-5 ring-1 ring-[#EC4899]/40">
+                <AvatarFallback className="text-[10px] bg-gradient-to-tr from-[#6D28D9] via-[#EC4899] to-[#06B6D4] text-white font-semibold">
                   {(() => {
                     const userInfo = getUserInfo();
                     if (userInfo?.name) {
@@ -406,7 +408,7 @@ Please analyze this error and fix the code to resolve it.`;
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-2.5 text-xs font-medium rounded-[6px] border-border hover:bg-panel-hover"
+                className="h-8 px-3 text-xs font-medium rounded-lg border-[#6D28D9]/40 hover:border-[#06B6D4]/60 hover:bg-[#6D28D9]/15 transition-all"
                 disabled={project?.role === "VIEWER"}
               >
                 Share
@@ -419,13 +421,13 @@ Please analyze this error and fix the code to resolve it.`;
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 px-2.5 text-xs font-medium rounded-[6px] border-border hover:bg-panel-hover hidden sm:inline-flex"
+                className="h-8 px-3 text-xs font-medium rounded-lg border-[#6D28D9]/40 hover:border-[#06B6D4]/60 hover:bg-[#6D28D9]/15 hidden sm:inline-flex transition-all"
               >
                 Upgrade
               </Button>
               <Button
                 size="sm"
-                className="h-8 px-3 text-xs font-medium rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="h-8 px-3.5 text-xs font-medium rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white shadow-[0_0_15px_rgba(236,72,153,0.35)] transition-all"
               >
                 Publish
               </Button>
@@ -436,7 +438,7 @@ Please analyze this error and fix the code to resolve it.`;
             variant="ghost"
             size="icon"
             onClick={handleLogout}
-            className="h-8 w-8 rounded-[6px] text-muted-foreground hover:text-foreground"
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-[#6D28D9]/15"
             aria-label="Sign out"
             title="Sign out"
           >
@@ -450,7 +452,7 @@ Please analyze this error and fix the code to resolve it.`;
         <ResizablePanelGroup direction="horizontal" className="h-full">
           {/* Left Chat Panel (35%) */}
           <ResizablePanel defaultSize={35} minSize={25} maxSize={50}>
-            <div className="h-full border-r border-border bg-panel">
+            <div className="h-full border-r border-border/70 dark:border-[#6D28D9]/30 bg-panel/70">
               <ChatPanel
                 messages={messages}
                 onSendMessage={handleSendMessage}
@@ -461,8 +463,8 @@ Please analyze this error and fix the code to resolve it.`;
             </div>
           </ResizablePanel>
 
-          {/* Resizable Handle: 1px line, signal hover, hit area */}
-          <ResizableHandle className="w-[1px] bg-border hover:bg-signal active:bg-signal transition-colors duration-150 relative after:absolute after:-left-2 after:-right-2 after:top-0 after:bottom-0 after:cursor-col-resize z-10" />
+          {/* Resizable Handle: 2px line with glowing cyan starlight hover */}
+          <ResizableHandle className="w-[2px] bg-border/80 dark:bg-[#6D28D9]/30 hover:bg-[#06B6D4] active:bg-[#EC4899] transition-colors duration-200 relative after:absolute after:-left-2 after:-right-2 after:top-0 after:bottom-0 after:cursor-col-resize z-10" />
 
           {/* Right Code/Preview Panel (65%) */}
           <ResizablePanel defaultSize={65} minSize={50} maxSize={75}>
@@ -485,10 +487,10 @@ Please analyze this error and fix the code to resolve it.`;
 
       {/* Rename Dialog */}
       <Dialog open={isRenameDialogOpen} onOpenChange={setIsRenameDialogOpen}>
-        <DialogContent className="max-w-md rounded-[6px] border border-border bg-card p-6 shadow-md">
+        <DialogContent className="max-w-md rounded-xl border border-[#6D28D9]/30 celestial-glass p-6 shadow-2xl">
           <DialogHeader>
             <DialogTitle className="font-display text-lg font-semibold text-foreground text-left">
-              Rename project
+              Rename Project Orbit
             </DialogTitle>
           </DialogHeader>
           <div className="py-3">
@@ -496,7 +498,7 @@ Please analyze this error and fix the code to resolve it.`;
               value={renameName}
               onChange={(e) => setRenameName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRenameSubmit()}
-              className="h-10 text-sm rounded-[6px] bg-background border-input focus-visible:ring-signal"
+              className="h-10 text-sm rounded-lg bg-background/80 border-border/80 focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30"
               autoFocus
             />
           </div>
@@ -504,16 +506,16 @@ Please analyze this error and fix the code to resolve it.`;
             <Button
               variant="outline"
               onClick={() => setIsRenameDialogOpen(false)}
-              className="h-9 rounded-[6px]"
+              className="h-9 rounded-lg border-border/80"
             >
               Cancel
             </Button>
             <Button
               onClick={handleRenameSubmit}
               disabled={!renameName.trim() || renameName === project?.name}
-              className="h-9 rounded-[6px] bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+              className="h-9 rounded-lg bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium shadow-[0_0_15px_rgba(236,72,153,0.3)]"
             >
-              Save
+              Save Changes
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -524,9 +526,9 @@ Please analyze this error and fix the code to resolve it.`;
         open={isDeleteDialogOpen}
         onOpenChange={setIsDeleteDialogOpen}
         onConfirm={executeDeleteProject}
-        title="Delete Project"
+        title="Delete Project Orbit"
         description="Are you sure you want to delete this project? This action cannot be undone."
-        confirmLabel="Delete"
+        confirmLabel="Delete Orbit"
       />
     </div>
   );

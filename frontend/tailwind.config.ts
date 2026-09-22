@@ -58,6 +58,19 @@ export default {
           hover: "hsl(var(--panel-hover))",
           active: "hsl(var(--panel-active))",
         },
+        celestial: {
+          void: "#0B071E", // 🌌 PRIMARY BLACK: The Deep Void / Background
+          deep: "#0B071E",
+          surface: "#2D1B4E", // 🔮 NEBULA PURPLE: Card/Container Backgrounds
+          card: "#2D1B4E",
+          violet: "#6D28D9", // ⚡ METEOR VIOLET: Primary Interactive Elements / UI Borders
+          pink: "#EC4899", // 🎨 SUPERNOVA PINK: Glow Accents, Hover States, Call-to-Actions
+          cyan: "#06B6D4", // ❄️ STELLAR CYAN: Highlights, Active States, Text Links
+          border: "rgba(109, 40, 217, 0.35)",
+          "border-hover": "rgba(236, 72, 153, 0.7)",
+          glow: "rgba(236, 72, 153, 0.45)",
+          "glow-cyan": "rgba(6, 182, 212, 0.45)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -77,11 +90,52 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.4" },
         },
+        orbit: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "orbit-reverse": {
+          "0%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.6", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.05)" },
+        },
+        twinkle: {
+          "0%, 100%": { opacity: "0.2", transform: "scale(0.8)" },
+          "50%": { opacity: "1", transform: "scale(1.2)" },
+        },
+        meteor: {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(215deg) translateX(-500px)",
+            opacity: "0",
+          },
+        },
+        shimmer: {
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         pulse: "pulse 1s ease-in-out infinite",
+        orbit: "orbit 24s linear infinite",
+        "orbit-fast": "orbit 12s linear infinite",
+        "orbit-reverse": "orbit-reverse 30s linear infinite",
+        float: "float 5s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
+        twinkle: "twinkle 3s ease-in-out infinite",
+        meteor: "meteor 5s linear infinite",
+        shimmer: "shimmer 2.5s infinite",
       },
       fontFamily: {
         sans: ["Geist", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],

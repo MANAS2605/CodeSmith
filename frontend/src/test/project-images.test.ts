@@ -13,8 +13,6 @@ describe("getProjectGradient", () => {
   it("returns distinct gradients for different projects", () => {
     const g1 = getProjectGradient(1, "Project One");
     const g2 = getProjectGradient(2, "Project Two");
-    const g1 = getProjectGradient(1, "Project One", 0);
-    const g2 = getProjectGradient(2, "Project Two", 1);
     expect(PROJECT_GRADIENTS.length).toBeGreaterThanOrEqual(16);
     expect(g1).toBeDefined();
     expect(g2).toBeDefined();

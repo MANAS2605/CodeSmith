@@ -4,75 +4,84 @@
 
 @layer base {
   :root {
-    --background: 40 8% 97%;
-    --foreground: 0 0% 7%;
+    --background: 224 35% 98%;
+    --foreground: 224 45% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
+    --card-foreground: 224 45% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
+    --popover-foreground: 224 45% 10%;
 
-    --primary: 0 0% 7%;
+    --primary: 258 90% 62%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 6% 93%;
-    --secondary-foreground: 0 0% 7%;
+    --secondary: 226 30% 93%;
+    --secondary-foreground: 224 45% 12%;
 
-    --muted: 40 6% 94%;
-    --muted-foreground: 0 0% 42%;
+    --muted: 226 30% 93%;
+    --muted-foreground: 225 18% 46%;
 
-    --accent: 40 8% 91%;
-    --accent-foreground: 0 0% 7%;
+    --accent: 226 35% 91%;
+    --accent-foreground: 224 45% 12%;
 
     --destructive: 347 77% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 4% 89%;
-    --input: 40 5% 85%;
-    --ring: 239 84% 67%;
-    --signal: 239 84% 67%;
+    --border: 226 22% 87%;
+    --input: 226 22% 85%;
+    --ring: 258 90% 62%;
+    --signal: 258 90% 62%;
 
     --radius: 0.5rem;
 
-    --panel: 40 6% 95%;
-    --panel-hover: 40 6% 92%;
-    --panel-active: 40 6% 89%;
+    --panel: 226 30% 95%;
+    --panel-hover: 226 30% 91%;
+    --panel-active: 226 30% 87%;
   }
 
   .dark {
-    --background: 240 4% 5%;
-    --foreground: 240 5% 96%;
+    /* 🌌 PRIMARY BLACK: #0B071E (The Deep Void / Background) */
+    --background: 250 62% 7%;
+    --foreground: 220 20% 98%;
 
-    --card: 240 5% 8.5%;
-    --card-foreground: 240 5% 96%;
+    /* 🔮 NEBULA PURPLE: #2D1B4E (Card/Container Backgrounds) */
+    --card: 261 49% 21%;
+    --card-foreground: 220 20% 98%;
 
-    --popover: 240 6% 10%;
-    --popover-foreground: 240 5% 96%;
+    --popover: 261 49% 21%;
+    --popover-foreground: 220 20% 98%;
 
-    --primary: 240 5% 96%;
-    --primary-foreground: 240 4% 5%;
+    /* ⚡ METEOR VIOLET: #6D28D9 (Primary Interactive Elements / UI Borders) */
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 5% 12%;
-    --secondary-foreground: 240 5% 96%;
+    --secondary: 261 40% 28%;
+    --secondary-foreground: 220 20% 98%;
 
-    --muted: 240 5% 12%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 261 40% 16%;
+    --muted-foreground: 260 20% 70%;
 
-    --accent: 240 5% 15%;
-    --accent-foreground: 240 5% 96%;
+    /* 🎨 SUPERNOVA PINK: #EC4899 (Glow Accents, Hover States, Call-to-Actions) */
+    --accent: 330 81% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 349 89% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 4% 16%;
-    --input: 240 4% 18%;
-    --ring: 239 84% 74%;
-    --signal: 239 84% 74%;
+    /* ⚡ METEOR VIOLET border */
+    --border: 263 50% 32%;
+    --input: 263 45% 26%;
 
-    --panel: 240 4% 7%;
-    --panel-hover: 240 5% 11%;
-    --panel-active: 240 5% 14%;
+    /* 🎨 SUPERNOVA PINK ring / glow */
+    --ring: 330 81% 60%;
+
+    /* ❄️ STELLAR CYAN: #06B6D4 (Highlights, Active States, Text Links) */
+    --signal: 189 94% 43%;
+
+    --panel: 252 58% 10%;
+    --panel-hover: 261 45% 25%;
+    --panel-active: 261 49% 30%;
   }
 }
 
@@ -146,4 +155,68 @@
   .tab-button.active {
     @apply bg-background text-foreground border-t-2 border-t-signal -mt-[1px];
   }
+
+  /* Celestial Design Utilities */
+  .celestial-glass {
+    @apply backdrop-blur-xl border border-slate-200/90 dark:border-purple-500/20 shadow-lg;
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  .dark .celestial-glass {
+    background: rgba(45, 27, 78, 0.75); /* Nebula Purple #2D1B4E */
+    border-color: rgba(109, 40, 217, 0.35); /* Meteor Violet #6D28D9 */
+  }
+
+  .celestial-glass-card {
+    @apply rounded-2xl backdrop-blur-xl transition-all duration-300;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(203, 213, 225, 0.8);
+    box-shadow: 0 10px 30px -5px rgba(109, 40, 217, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  }
+
+  .celestial-glass-card:hover {
+    border-color: #EC4899; /* Supernova Pink hover */
+    box-shadow: 0 14px 35px -5px rgba(236, 72, 153, 0.25);
+  }
+
+  .dark .celestial-glass-card {
+    background: linear-gradient(135deg, rgba(45, 27, 78, 0.88) 0%, rgba(11, 7, 30, 0.96) 100%);
+    border: 1px solid rgba(109, 40, 217, 0.4); /* Meteor Violet #6D28D9 */
+    box-shadow: 0 8px 32px -4px rgba(11, 7, 30, 0.8), inset 0 1px 0 0 rgba(236, 72, 153, 0.15);
+  }
+
+  .dark .celestial-glass-card:hover {
+    border-color: #EC4899; /* Supernova Pink #EC4899 */
+    box-shadow: 0 0 35px -5px rgba(236, 72, 153, 0.4), inset 0 1px 0 0 rgba(236, 72, 153, 0.25);
+  }
+
+  .celestial-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] dark:from-white dark:via-[#EC4899] dark:to-[#06B6D4];
+  }
+
+  .celestial-glow {
+    box-shadow: 0 0 25px -4px rgba(236, 72, 153, 0.45); /* Supernova Pink */
+  }
+
+  .celestial-glow-cyan {
+    box-shadow: 0 0 25px -4px rgba(6, 182, 212, 0.45); /* Stellar Cyan */
+  }
+
+  .celestial-glow-violet {
+    box-shadow: 0 0 25px -4px rgba(109, 40, 217, 0.45); /* Meteor Violet */
+  }
+
+  /* Prose code styling in chat */
+  .prose pre {
+    @apply rounded-xl border border-slate-200 bg-slate-950 text-slate-100 p-3.5 my-2.5 overflow-x-auto text-xs font-mono shadow-sm;
+  }
+
+  .dark .prose pre {
+    @apply border-purple-500/20 bg-slate-950/90 text-slate-100;
+  }
+
+  .prose :not(pre) > code {
+    @apply px-1.5 py-0.5 rounded-md text-xs font-mono bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20;
+  }
 }
+

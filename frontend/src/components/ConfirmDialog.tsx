@@ -8,7 +8,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface ConfirmDialogProps {
@@ -25,7 +24,7 @@ interface ConfirmDialogProps {
 export function ConfirmDialog({
   open,
   onOpenChange,
-  title = "Delete Project",
+  title = "Delete Project Orbit",
   description = "Are you sure you want to delete this project? This action cannot be undone.",
   confirmLabel = "Delete",
   cancelLabel = "Cancel",
@@ -34,7 +33,7 @@ export function ConfirmDialog({
 }: ConfirmDialogProps) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="max-w-md rounded-[6px] border border-border bg-card p-6 shadow-md">
+      <AlertDialogContent className="max-w-md rounded-xl border border-[#6D28D9]/40 celestial-glass p-6 shadow-2xl">
         <AlertDialogHeader>
           <AlertDialogTitle className="font-display text-lg font-semibold text-foreground">
             {title}
@@ -44,7 +43,7 @@ export function ConfirmDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="mt-4 flex gap-2 sm:justify-end">
-          <AlertDialogCancel className="h-9 px-4 rounded-[6px] border-border text-sm font-medium hover:bg-panel-hover">
+          <AlertDialogCancel className="h-9 px-4 rounded-lg border-border/80 text-sm font-medium hover:bg-[#6D28D9]/15">
             {cancelLabel}
           </AlertDialogCancel>
           <AlertDialogAction
@@ -54,10 +53,10 @@ export function ConfirmDialog({
               onOpenChange(false);
             }}
             className={cn(
-              "h-9 px-4 rounded-[6px] text-sm font-medium",
+              "h-9 px-4 rounded-lg text-sm font-medium transition-all shadow-md",
               isDestructive
-                ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                : "bg-primary text-primary-foreground hover:bg-primary/90"
+                ? "bg-destructive hover:bg-destructive/90 text-destructive-foreground shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                : "bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white shadow-[0_0_15px_rgba(236,72,153,0.3)]"
             )}
           >
             {confirmLabel}

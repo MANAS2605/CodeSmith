@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Loader2 } from "lucide-react";
+import { Loader2, Sparkles, Star, ArrowRight, Lock, Mail, User } from "lucide-react";
 import { api, setAuthToken, setUserInfo } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CelestialBackground } from "@/components/celestial/CelestialBackground";
+import { CelestialOrb } from "@/components/celestial/CelestialOrb";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -36,13 +38,13 @@ export default function Signup() {
       setAuthToken(response.token);
       setUserInfo(response.user);
       toast({
-        title: "Welcome!",
-        description: "Account created successfully",
+        title: "Welcome to CodeSmith!",
+        description: "Your celestial account has been created successfully",
       });
       navigate("/projects");
     } catch (error) {
       toast({
-        title: "Signup failed",
+        title: "Registration failed",
         description: error instanceof Error ? error.message : "Could not create account",
         variant: "destructive",
       });
@@ -52,141 +54,196 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex bg-background text-foreground">
-      <div className="fixed top-4 right-4 z-50"><ThemeToggle /></div>
-      {/* Left panel (>= lg) */}
-      <div className="hidden lg:flex lg:w-[45%] bg-[#111111] dark:bg-[#0c0d12] text-[#FAFAFA] p-12 flex-col justify-between border-r border-[#27272A] relative">
-        <Logo size="default" inverted />
+    <CelestialBackground
+      className="min-h-screen w-full bg-background text-foreground relative selection:bg-cyan-500/30"
+      contentClassName="min-h-screen w-full flex flex-col lg:flex-row items-stretch"
+    >
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
 
-        <div className="max-w-md space-y-8 my-auto">
+      {/* Left panel (>= lg) - Celestial Showcase: exactly 50% width, full height */}
+      <div className="hidden lg:flex lg:w-1/2 min-h-screen bg-gradient-to-b from-purple-50/70 via-pink-50/30 to-cyan-50/50 dark:from-[#0B071E] dark:via-[#2D1B4E]/90 dark:to-[#0B071E] text-foreground dark:text-white p-10 xl:p-14 flex-col justify-between border-r border-border/80 dark:border-[#6D28D9]/30 relative overflow-hidden backdrop-blur-md shrink-0">
+        {/* Ambient lighting */}
+        <div className="absolute top-1/4 -right-20 w-80 h-80 rounded-full bg-cyan-300/30 dark:bg-[#06B6D4]/20 blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 -left-20 w-80 h-80 rounded-full bg-purple-300/30 dark:bg-[#6D28D9]/20 blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10">
+          <Logo size="default" />
+        </div>
+
+        <div className="max-w-md w-full mx-auto space-y-6 my-auto relative z-10 py-6">
+          {/* Animated Celestial Orb */}
+          <div className="flex justify-center -my-2">
+            <CelestialOrb size="lg" glowColor="cyan" />
+          </div>
+
           <div>
-            <p className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-3">
-              New Account
-            </p>
-            <h1 className="font-display text-3xl font-medium tracking-tight leading-snug text-white">
-              Start building your next big idea.
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#6D28D9]/40 bg-[#6D28D9]/15 text-[#06B6D4] text-xs font-mono uppercase tracking-widest mb-3 backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-[#EC4899] animate-pulse" />
+              <span>Cosmic Developer Genesis</span>
+            </div>
+            <h1 className="font-display text-3xl xl:text-4xl font-semibold tracking-tight leading-tight text-foreground dark:text-white">
+              Chart new constellations in software.
             </h1>
-            <p className="mt-3 text-sm text-zinc-300/90 leading-relaxed">
-              Collaborate, stream modifications in real time, and deploy prototypes instantly.
+            <p className="mt-3 text-sm text-muted-foreground dark:text-zinc-300/90 leading-relaxed">
+              Create an account to begin engineering with autonomous AI pair programming, dynamic multi-file synthesis, and instant cloud previews.
             </p>
           </div>
 
-          {/* Static illustration with real UI vocabulary */}
-          <div className="rounded-[6px] border border-white/10 bg-white/[0.04] p-5 space-y-3.5 backdrop-blur-xs">
-            <div className="flex items-center gap-2.5 text-[12px]">
-              <span className="w-1.5 h-1.5 rounded-full border border-emerald-400/80 bg-emerald-400/30 shrink-0 inline-block" />
-              <span className="text-zinc-300 font-sans">Thought: preparing project files</span>
+          {/* Celestial Real-time Stream Card */}
+          <div className="rounded-xl border border-border/80 dark:border-[#6D28D9]/40 bg-card/90 dark:bg-[#2D1B4E]/75 p-5 space-y-3.5 backdrop-blur-xl shadow-xl dark:shadow-[0_8px_32px_rgba(11,7,30,0.8)] relative overflow-hidden">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5 text-[12px]">
+                <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-[#06B6D4] shadow-[0_0_8px_#06B6D4] shrink-0 inline-block animate-pulse" />
+                <span className="font-sans font-medium text-foreground dark:text-zinc-200">
+                  System Ready: Initializing Project Core
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-[#EC4899] uppercase px-2 py-0.5 rounded bg-[#6D28D9]/15 border border-[#6D28D9]/30">
+                Astral Mesh
+              </span>
             </div>
+
             <div className="flex items-center gap-2 text-xs font-mono">
-              <span className="text-[10px] uppercase tracking-wider text-zinc-400">Read</span>
-              <span className="px-2 py-0.5 rounded-[4px] bg-white/10 border border-white/15 text-zinc-200 text-[11px]">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Scaffold</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-[#6D28D9]/15 border border-[#6D28D9]/30 text-[#EC4899] text-[11px] flex items-center gap-1.5">
+                <Star className="w-2.5 h-2.5 text-[#EC4899]" />
                 package.json
               </span>
             </div>
+
             <div className="flex items-center gap-2 text-xs font-mono">
-              <span className="text-[10px] uppercase tracking-wider text-signal font-medium">Edited</span>
-              <span className="px-2 py-0.5 rounded-[4px] bg-white/10 border border-white/15 text-zinc-200 text-[11px]">
+              <span className="text-[10px] uppercase tracking-wider text-[#06B6D4] font-medium">Ready</span>
+              <span className="px-2.5 py-0.5 rounded-md bg-[#06B6D4]/15 border border-[#06B6D4]/30 text-[#06B6D4] text-[11px] flex items-center gap-1.5">
+                <Sparkles className="w-2.5 h-2.5 text-[#06B6D4]" />
                 App.tsx
               </span>
             </div>
           </div>
         </div>
 
-        <div className="text-xs text-zinc-500 font-mono">
-          CodeSmith Studio
+        <div className="flex items-center justify-between text-xs text-muted-foreground dark:text-zinc-400 font-mono relative z-10 pt-4 border-t border-border/60 dark:border-white/10">
+          <span>CodeSmith Astral Studio</span>
+          <span className="text-[#EC4899] flex items-center gap-1.5 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#EC4899] animate-ping" />
+            Gateway Online
+          </span>
         </div>
       </div>
 
-      {/* Right panel (form) */}
-      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-16">
-        <div className="w-full max-w-sm mx-auto">
+      {/* Right panel - Registration Form: Exactly half width on lg, centered */}
+      <div className="flex-1 min-h-screen flex flex-col justify-center items-center p-6 sm:p-12 lg:p-14 relative z-10">
+        <div className="w-full max-w-md mx-auto my-auto">
           {/* Mobile Logo */}
-          <div className="lg:hidden mb-8">
+          <div className="lg:hidden mb-8 flex justify-center">
             <Logo size="default" />
           </div>
 
-          <div className="mb-8">
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground">
-              Create an account
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1.5">
-              Enter your details to create your CodeSmith account.
-            </p>
+          <div className="celestial-glass-card p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+            {/* Soft decorative star glow in corner */}
+            <div className="absolute -top-12 -right-12 w-28 h-28 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="mb-8">
+              <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight celestial-gradient-text">
+                Create account
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1.5">
+                Embark on your journey with the CodeSmith cosmos.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="name" className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-cyan-500" />
+                  Explorer Name
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Cosmic Voyager"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all text-foreground"
+                    disabled={isLoading}
+                    autoComplete="name"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="email" className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[#06B6D4]" />
+                  Email Address
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="explorer@cosmos.io"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all text-foreground"
+                    disabled={isLoading}
+                    autoComplete="email"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="password" className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-[#6D28D9]" />
+                  Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="h-10 text-sm rounded-lg bg-background border-input focus-visible:border-[#06B6D4] focus-visible:ring-2 focus-visible:ring-[#EC4899]/30 transition-all text-foreground"
+                    disabled={isLoading}
+                    autoComplete="new-password"
+                  />
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-10 mt-3 bg-gradient-to-r from-[#6D28D9] via-[#EC4899] to-[#06B6D4] hover:opacity-95 text-white font-medium rounded-lg text-sm shadow-[0_0_20px_rgba(236,72,153,0.35)] transition-all duration-300 gap-2"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Creating Astral Account...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Initialize Workspace</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+
+            <div className="mt-6 pt-6 border-t border-border/60 text-center">
+              <p className="text-xs text-muted-foreground">
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  className="font-medium text-[#06B6D4] hover:text-[#EC4899] underline underline-offset-4 transition-colors"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </div>
           </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="name" className="text-xs font-medium text-foreground">
-                Full Name
-              </Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Jane Doe"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="h-10 text-sm rounded-[6px] bg-background border-input focus-visible:ring-signal"
-                disabled={isLoading}
-                autoComplete="name"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-xs font-medium text-foreground">
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-10 text-sm rounded-[6px] bg-background border-input focus-visible:ring-signal"
-                disabled={isLoading}
-                autoComplete="email"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-xs font-medium text-foreground">
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="h-10 text-sm rounded-[6px] bg-background border-input focus-visible:ring-signal"
-                disabled={isLoading}
-                autoComplete="new-password"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full h-10 mt-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-[6px] text-sm"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Creating account...
-                </>
-              ) : (
-                "Create account"
-              )}
-            </Button>
-          </form>
-
-          <p className="text-center text-xs text-muted-foreground mt-6">
-            Already have an account?{" "}
-            <Link to="/login" className="text-foreground underline underline-offset-4 hover:text-signal font-medium">
-              Sign in
-            </Link>
-          </p>
         </div>
       </div>
-    </div>
+    </CelestialBackground>
   );
 }

@@ -62,28 +62,35 @@ public class KubernetesDeploymentServiceImpl implements DeploymentService {
             return p;
         });
 
-        //Syncer commands
+        try {
 
-        //to get files from Minio to pod
-        String initialSyncCmd=String.format(
-                "mc mirror --overwrite myminio/projects/%d/ /app/",
-                projectId);
+            //Syncer commands
 
-        log.info("Starting initial sync for project {} in pod {}",projectId,podName);
-        execCommand(podName,SYNCER_CONTAINER,"sh","-c",initialSyncCmd);
+            //to get files from Minio to pod
+            String initialSyncCmd = String.format(
+                    "mc mirror --overwrite myminio/projects/%d/ /app/",
+                    projectId);
 
-        String watchCmd = String.format(
-                "nohup mc mirror --overwrite --watch myminio/projects/%d/ /app/ > /app/sync.log 2>&1 &",
-                projectId);
-        execCommand(podName, SYNCER_CONTAINER, "sh", "-c", watchCmd);
+            log.info("Starting initial sync for project {} in pod {}", projectId, podName);
+            execCommand(podName, SYNCER_CONTAINER, "sh", "-c", initialSyncCmd);
 
-        //Runner commands
-        String startCmd="npm install && nohup npm run dev -- --host 0.0.0.0 --port 5173 > /app/dev.log 2>&1 &";
-        log.info("Starting dev server for project {}...", projectId);
-        execCommand(podName, RUNNER_CONTAINER, "sh", "-c", startCmd);
+            String watchCmd = String.format(
+                    "nohup mc mirror --overwrite --watch myminio/projects/%d/ /app/ > /app/sync.log 2>&1 &",
+                    projectId);
+            execCommand(podName, SYNCER_CONTAINER, "sh", "-c", watchCmd);
 
-        log.info("Deployment successful: http://{}:{}", domain, REVERSE_PROXY_PORT);
-        return new DeployResponse("http://"+domain+":"+REVERSE_PROXY_PORT);
+            //Runner commands
+            String startCmd = "npm install && nohup npm run dev -- --host 0.0.0.0 --port 5173 > /app/dev.log 2>&1 &";
+            log.info("Starting dev server for project {}...", projectId);
+            execCommand(podName, RUNNER_CONTAINER, "sh", "-c", startCmd);
+
+            log.info("Deployment successful: http://{}:{}", domain, REVERSE_PROXY_PORT);
+            return new DeployResponse("http://" + domain + ":" + REVERSE_PROXY_PORT);
+        } catch (Exception e) {
+            log.error("Deployment failed for project {},Releasing Pod {}", projectId,podName, e);
+            client.pods().inNamespace(NAMESPACE).withName(podName).delete();
+            throw new RuntimeException("Failed to deploy Project with id: " + projectId);
+        }
 
     }
 

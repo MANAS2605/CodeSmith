@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, ChevronDown } from "lucide-react";
+import { ChevronRight, ChevronDown, Folder, Sparkles } from "lucide-react";
 import { FileNode } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { getFileIconInfo } from "@/lib/file-icons";
@@ -38,14 +38,16 @@ function FileTreeItem({ node, depth, selectedPath, onSelectFile }: FileTreeItemP
     <div>
       <div
         className={cn(
-          "file-tree-item group select-none relative",
-          isSelected && "active before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-signal"
+          "file-tree-item group select-none relative transition-all duration-150",
+          isSelected
+            ? "bg-[#2D1B4E]/60 text-purple-700 dark:text-[#06B6D4] font-medium before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-[#06B6D4] before:shadow-[0_0_8px_#06B6D4]"
+            : "hover:bg-[#6D28D9]/15 hover:text-foreground"
         )}
         style={{ paddingLeft: `${depth * 14 + 10}px` }}
         onClick={handleClick}
       >
         {isDirectory ? (
-          <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0 text-muted-foreground group-hover:text-foreground">
+          <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0 text-muted-foreground group-hover:text-[#EC4899] dark:group-hover:text-[#06B6D4] transition-colors">
             {isExpanded ? (
               <ChevronDown className="w-3 h-3" />
             ) : (
@@ -65,9 +67,9 @@ function FileTreeItem({ node, depth, selectedPath, onSelectFile }: FileTreeItemP
 
       {isDirectory && isExpanded && node.children && (
         <div className="relative">
-          {/* Hairline indent guide */}
+          {/* Constellation thread indent guide */}
           <div
-            className="absolute top-0 bottom-0 border-l border-border/40"
+            className="absolute top-0 bottom-0 border-l border-[#6D28D9]/25"
             style={{ left: `${depth * 14 + 16}px` }}
           />
           {node.children.map((child) => (
@@ -91,7 +93,7 @@ export function FileTree({ files, selectedPath, onSelectFile, isLoading }: FileT
       <div className="p-3 space-y-2">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div key={i} className="h-6 flex items-center gap-2 animate-pulse">
-            <div className="w-3.5 h-3.5 bg-muted/60 rounded" />
+            <div className="w-3.5 h-3.5 bg-[#6D28D9]/20 rounded" />
             <div className="h-3 bg-muted/50 rounded flex-1" style={{ width: `${40 + (i % 3) * 20}%` }} />
           </div>
         ))}
@@ -101,8 +103,8 @@ export function FileTree({ files, selectedPath, onSelectFile, isLoading }: FileT
 
   if (files.length === 0) {
     return (
-      <div className="p-4 text-center text-muted-foreground text-xs font-mono">
-        No files yet
+      <div className="p-6 text-center text-muted-foreground text-xs font-mono">
+        No files in workspace
       </div>
     );
   }
