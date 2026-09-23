@@ -1,5 +1,6 @@
 package com.codingshuttle.projects.lovable_clone.service.impl;
 
+import com.codingshuttle.projects.lovable_clone.dto.subscription.PlanResponse;
 import com.codingshuttle.projects.lovable_clone.dto.subscription.SubscriptionResponse;
 import com.codingshuttle.projects.lovable_clone.entity.Plan;
 import com.codingshuttle.projects.lovable_clone.entity.Subscription;
@@ -33,15 +34,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final PlanRepository planRepository;
     private final ProjectMemberRepository projectMemberRepository;
 
+
     private final Integer FREE_TIER_PROJECTS_ALLOWED=100;
 
+    //claude fix
     @Override
     public SubscriptionResponse getCurrentSubscription() {
-        Long userId= authUtil.getCurrentUserId();
+        Long userId = authUtil.getCurrentUserId();
 
-        var currentSubscription= subscriptionRepository.findByUserIdAndStatusIn(userId, Set.of(
-                SubscriptionStatus.ACTIVE,SubscriptionStatus.TRIALING,
-                SubscriptionStatus.PAST_DUE
+        var currentSubscription = subscriptionRepository.findByUserIdAndStatusIn(userId, Set.of(
+                SubscriptionStatus.ACTIVE, SubscriptionStatus.PAST_DUE,
+                SubscriptionStatus.TRIALING
         )).orElse(
                 new Subscription()
         );
@@ -147,7 +150,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Long userId=authUtil.getCurrentUserId();;
         SubscriptionResponse currentSubscription=getCurrentSubscription();
         int countOfOwnedProjects = projectMemberRepository.countProjectOwnedByUser(userId);
-        if(currentSubscription==null){
+        if(currentSubscription.plan()==null){
             return countOfOwnedProjects<FREE_TIER_PROJECTS_ALLOWED;
         }
 
